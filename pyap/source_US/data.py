@@ -908,6 +908,7 @@ def states_abbrvs_regex() -> str:
         "ME",
         "MD",
         "MA",
+        "MASS",
         "MI",
         "MN",
         "MS",

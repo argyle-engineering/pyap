@@ -532,6 +532,8 @@ def test_postal_code(input, expected):
         ("Tx", True),
         ("nY", True),
         ("fl", True),
+        ("Mass", True),
+        ("MASS.", True),
     ],
 )
 def test_region1(input, expected):
