@@ -889,7 +889,7 @@ full_street = r"""
     (?:
         (?P<full_street>
             (?:
-                (?P<po_box_front>{po_box})?\,?\s?
+                (?P<po_box_b>{po_box})?\,?\s?
                 {street_number}
                 (?:
                     (?:
@@ -908,10 +908,10 @@ full_street = r"""
                 {floor}?\,?\s?
                 {building}?\,?\s?
                 {occupancy}?\,?\s?
-                (?P<po_box_end>{po_box})?
+                (?P<po_box_a>{po_box})?
             )
             |
-            (?P<po_box_alone>{po_box})
+            (?P<po_box_c>{po_box})
         )
     )""".format(
     street_number=street_number,
