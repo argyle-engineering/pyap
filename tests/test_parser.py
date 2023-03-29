@@ -101,11 +101,17 @@ def test_parse_address():
 
 def test_parse_po_box():
     ap = parser.AddressParser(country="US")
-    test_address = (
+
+    address = ap.parse_single_street(
         "ELECTRIC WIRING SYSTEMS INC, 1111 ASHLEY STREET, P.O. BOX 99999, "
         "BOWLING GREEN, KY 444444-9999"
-    )
-    addresses = ap.parse_single_street(test_address)
-    assert addresses[0].po_box_front is None
-    assert addresses[0].po_box_end == "P.O. BOX 99999"
-    assert addresses[0].po_box_alone is None
+    )[0]
+    assert address.po_box_end == "P.O. BOX 99999"
+
+    address = ap.parse_single_street("P.O. BOX 99999, One Velvet Drive")[0]
+    assert address.po_box_front == "P.O. BOX 99999"
+
+    address = ap.parse_single_street("P.O. BOX 99999")[0]
+    assert address.po_box_front is None
+    assert address.po_box_alone == "P.O. BOX 99999"
+    assert address.po_box_end is None
