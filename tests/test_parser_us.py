@@ -418,7 +418,7 @@ def test_po_box_positive(input, expected):
         ("78 SE Criket", True),
         ("P.O. BOX 41256, One Velvet Drive", True),
         ("666 Hell ST PMB 29700", True),
-        # positive assertions
+        # negative assertions
         (", 666 Hell ST PMB 29700", False),
     ],
 )
