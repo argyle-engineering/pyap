@@ -89,10 +89,23 @@ def test_parse_address():
 
     ap = parser.AddressParser(country="US")
     test_address = (
-        "xxx, 225 E. John Carpenter Freeway, " + "Suite 1500 Irving, Texas 75062 xxx"
+        "xxx 225 E. John Carpenter Freeway, " + "Suite 1500 Irving, Texas 75062 xxx"
     )
 
     addresses = ap.parse(test_address)
+    assert (
+        addresses[0].full_address
+        == "225 E. John Carpenter Freeway, Suite 1500 Irving, Texas 75062"
+    )
+
+
+def test_do_not_match_separator_start():
+    ap = parser.AddressParser(country="US")
+    test_address = (
+        "xxx, 225 E. John Carpenter Freeway, Suite 1500 Irving, Texas 75062 xxx"
+    )
+    addresses = ap.parse(test_address)
+    assert addresses[0].match_start == 5
     assert (
         addresses[0].full_address
         == "225 E. John Carpenter Freeway, Suite 1500 Irving, Texas 75062"
