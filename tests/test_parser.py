@@ -89,7 +89,7 @@ def test_parse_address():
 
     ap = parser.AddressParser(country="US")
     test_address = (
-        "xxx 225 E. John Carpenter Freeway, " + "Suite 1500 Irving, Texas 75062 xxx"
+        "xxx, 225 E. John Carpenter Freeway, " + "Suite 1500 Irving, Texas 75062 xxx"
     )
 
     addresses = ap.parse(test_address)
