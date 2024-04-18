@@ -1,41 +1,10 @@
-name: QA checks
+name: QA Checks
 
-on:  # yamllint disable-line rule:truthy
-  push:
+'on': [push]
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-
-    strategy:  # launches
-      fail-fast: false
-      matrix:
-        task:  # yamllint disable rule:indentation
-        - lint
-        - yamllint
-        - check_types
-        - check_fmt
-        - test
-
-    steps:
-    - uses: actions/checkout@v2
-
-    - name: Set up Python 3.9.12
-      uses: actions/setup-python@v2
-      with:
-        python-version: 3.9.12
-
-    - name: Set up cache
-      uses: actions/cache@v2
-      id: cache
-      with:
-        path: /home/runner/.cache/pypoetry/virtualenvs
-        key: venv-${{ hashFiles('**/.github/workflows/qa.yml') }}-${{ hashFiles('**/poetry.lock')
-          }}
-
-    - name: Install dependencies
-      run: |2
-        curl -sSL https://install.python-poetry.org | POETRY_VERSION=1.4.2 python3 -
-        poetry install
-    - name: QA
-      run: poetry run task ${{ matrix['task'] }}
+  run:
+    uses: argyle-systems/argyle-common-python/.github/workflows/qa.yaml@v2.0.12
+    secrets: inherit
+    with:
+      poetry_install_cmd: poetry install
