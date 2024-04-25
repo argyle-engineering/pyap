@@ -476,6 +476,7 @@ def test_full_street_positive(input, expected):
     [
         # positive assertions
         ("P.O. BOX 10323 PH (205) 595-3511\nBIRMINGHAM, AL 35202", True),
+        ("25 HARBOR PARK DRIVE\nPORT WASHINGTON\nNY 11050", True),
         ("1100 VIRGINIA DR\nFORT WASHINGTON, PA, 19034", True),
         ("3602 HIGHPOINT\nSAN ANTONIO TX78217", True),
         ("8025 BLACK HORSE\nSTE 300\nPLEASANTVILLE NJ 08232", True),
