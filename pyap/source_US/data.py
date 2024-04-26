@@ -1154,7 +1154,7 @@ postal_code = rf"""(?P<postal_code>{postal_code_re})"""
 
 country = r"""
             (?:
-                [Uu]\.?[Ss]\.?[Aa]\.?|
+                [Uu]\.?[Ss]\.?(?:[Aa]\.?)?|
                 [Uu][Nn][Ii][Tt][Ee][Dd]\ [Ss][Tt][Aa][Tt][Ee][Ss](?:\ [Oo][Ff]\ [Aa][Mm][Ee][Rr][Ii][Cc][Aa])?
             )
             """
@@ -1171,8 +1171,8 @@ def make_region1_postal_code(
 
     _postal_code = f"""(?:{part_div}|\-)? {postal_code}"""
     return rf"""
-            (?:{_indexed_region1("a")}?{_postal_code}{_indexed_region1("b")}?
-            |{_indexed_region1("c")}(?![-,.\ A-Za-z]{{0,10}}{postal_code_re}))
+            (?:{_indexed_region1("a")}?(?:{part_div}{country})?{_postal_code}{_indexed_region1("b")}?
+            |{_indexed_region1("c")}(?![-,.\sA-Za-z]{{0,10}}{postal_code_re}))
         """
 
 
