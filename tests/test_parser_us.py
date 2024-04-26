@@ -476,6 +476,7 @@ def test_full_street_positive(input, expected):
     [
         # positive assertions
         ("2755 CARPENTER RD SUITE 1W\nANN ARBOR, MI, US, 48108", True),
+        ("1111 3rd Street Promenade, Santa Monica, CA 90000", True),
         ("P.O. BOX 10323 PH (205) 595-3511\nBIRMINGHAM, AL 35202", True),
         ("25 HARBOR PARK DRIVE\nPORT WASHINGTON\nNY 11050", True),
         ("222 W. Las Colinas Blvd\nSuite 900N\nIrving, Texas, USA 75039-5421", True),

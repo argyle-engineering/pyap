@@ -592,6 +592,7 @@ street_type_list = [
     "Pr",
     "Prairie",
     "Prk",
+    "Promenade",
     "Prr",
     "Prt",
     "Prts",
