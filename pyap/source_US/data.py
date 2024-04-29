@@ -264,6 +264,7 @@ street_type_list = [
     "Btm",
     "Burg",
     "Burgs",
+    "Bvd",
     "Byp",
     "Bypa",
     "Bypas",
