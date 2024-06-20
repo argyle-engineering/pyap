@@ -480,9 +480,9 @@ region1 = r"""
         (?P<region1>
             (?:
                 # province abbreviations (English)
-                A\.?B\.?|B\.?C\.?|M\.?B\.?|N\.?B\.?|N\.?L\.?|
-                N\.?T\.?|N\.?S\.?|N\.?U\.?|O\.?N\.?|P\.?E\.?|
-                Q\.?C\.?|S\.?K\.?|Y\.?T\.?
+                AB\b|Alta\.|BC\b|B\.C\.|MB\b|Man\.|NB\b|N\.B\.|NL/b|N\.L\.|
+                NT\b|N\.W\.T\.|NS\b|N\.S\.|NU\b|Nvt\.|ON\b|Ont\.|PE\b|P\.E\.I\.|
+                QC\b|Que\.|SK\b|Sask\.|YT\b|Y\.T\.
             )
             |
             (?:
