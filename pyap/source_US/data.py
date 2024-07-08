@@ -917,6 +917,13 @@ occupancy = r"""
             )
             """
 
+mail_stop = r"""
+            (?P<mail_stop>
+                # attention: do not to mix up with postal code
+                MSC?:?\s[A-Z]{,4}\s?\d{3,4}\b
+            )
+            """
+
 po_box = r"""
             (?:
                 [Pp]\.?\ ?[Oo]\.?\ ?
@@ -968,6 +975,7 @@ full_street = r"""
                 (?:{part_div}{floor})?
                 (?:{part_div}{building})?
                 (?:{part_div}{occupancy})?
+                (?:{part_div}{mail_stop})?
                 (?:{part_div}(?P<po_box_a>{po_box}))?
             )
             |
@@ -984,6 +992,7 @@ full_street = r"""
     floor=floor,
     building=building,
     occupancy=occupancy,
+    mail_stop=mail_stop,
     po_box=po_box,
 )
 

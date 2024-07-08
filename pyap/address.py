@@ -29,6 +29,7 @@ class Address:
     country: Union[str, None] = None
     route_id: Union[str, None] = None
     occupancy: Union[str, None] = None
+    mail_stop: Union[str, None] = None
     street_type: Union[str, None] = None
     building_id: Union[str, None] = None
     postal_code: Union[str, None] = None

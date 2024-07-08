@@ -195,6 +195,18 @@ def test_combine_results():
                 "postal_code": "67530",
             },
         ),
+        (
+            "One Baylor Plaza MS: BCM204\nHouston TX 77030-3411",
+            {
+                "street_number": "One",
+                "street_type": "Plaza",
+                "street_name": "Baylor",
+                "mail_stop": "MS: BCM204",
+                "city": "Houston",
+                "region1": "TX",
+                "postal_code": "77030-3411",
+            },
+        ),
     ],
 )
 def test_parse_address(input: str, expected):

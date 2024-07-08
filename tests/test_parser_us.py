@@ -354,6 +354,23 @@ def test_occupancy(input, expected):
 
 
 @pytest.mark.parametrize(
+    "input, expected",
+    [
+        # positive assertions
+        ("MS CORP 003", True),
+        ("MS: BCM204", True),
+        ("MSC 1234", True),
+        ("MS 1234", True),
+        # negative assertions
+        ("MS 12345", False),
+        ("MS CORP", False),
+    ],
+)
+def test_mail_stop(input, expected):
+    execute_matching_test(input, expected, data_us.mail_stop)
+
+
+@pytest.mark.parametrize(
     "input,expected",
     [
         # positive assertions
@@ -476,6 +493,8 @@ def test_full_street_positive(input, expected):
     "input,expected",
     [
         # positive assertions
+        ("One Baylor Plaza MS: BCM204\nHouston TX 77030-3411", True),
+        ("ONE ADP DRIVE\nMS CORP 003\nAUGUSTA, GA 30909", True),
         ("2755 CARPENTER RD SUITE 1W\nANN ARBOR, MI, US, 48108", True),
         ("1111 3rd Street Promenade, Santa Monica, CA 90000", True),
         ("P.O. BOX 10323 PH (205) 595-3511\nBIRMINGHAM, AL 35202", True),
