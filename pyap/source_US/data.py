@@ -127,7 +127,7 @@ street_name_multi_word_re = r"""
 
 # This pattern should be quite conservative because it will be followed by
 # optional matchers - we want to avoid matching too much with this.
-street_name_one_word_re = r"(?:[A-Z][A-Za-z]{2,15})"
+street_name_one_word_re = r"(?:[A-Z][A-Za-z]{,15})"
 
 
 interstate_specs = [
@@ -769,7 +769,7 @@ street_type_list = [
     "Xrds",
 ]
 
-street_type_leading_list = ["Camino", "El\ Camino"]
+street_type_leading_list = ["Camino", "El\ Camino", "Avenue"]
 
 
 def street_type_list_to_regex(street_type_list: list[str]) -> str:
