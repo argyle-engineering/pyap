@@ -211,7 +211,7 @@ post_direction = r"""
 )
 
 # This list was taken from: https://pe.usps.com/text/pub28/28apc_002.htm
-# Broadway and Lp (abbreviation for Loop) were added to the list
+# Bay, Broadway and Lp (abbreviation for Loop) were added to the list
 street_type_list = [
     "Allee",
     "Alley",
@@ -230,6 +230,7 @@ street_type_list = [
     "Avenue",
     "Avn",
     "Avnue",
+    "Bay",
     "Bayoo",
     "Bayou",
     "Bch",

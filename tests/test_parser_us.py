@@ -228,6 +228,7 @@ def test_post_direction(input, expected):
         ("Interstate 35", True),
         ("I- 35", True),
         ("I-35 Service Road", True),
+        ("BAY", True),
         # negative assertions
         # TODO
     ],
@@ -601,6 +602,7 @@ def test_full_street_positive(input, expected):
         ("2006 Broadway Ave Suite 2A, PO Drawer J, Great Bend, KS 67530", True),
         ("135 Pinelawn Road STE 130 S, Melville, NY 11747", True),
         ("1800 M STREET NW SUITE 375 N, WASHINGTON, DC 20036", True),
+        ("10 INDIAN BAY, ALAMEDA CA 94502", True),
         # negative assertions
         ("ONE HEALING CENTER LLC, 16444", False),
         ("85 STEEL REGULAR SHAFT - NE", False),
