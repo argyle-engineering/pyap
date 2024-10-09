@@ -207,6 +207,18 @@ def test_combine_results():
                 "postal_code": "77030-3411",
             },
         ),
+        (
+            "2817 PETERS ROAD BAY 52, Amazeville, AL 12345",
+            {
+                "street_number": "2817",
+                "street_type": "ROAD",
+                "street_name": "PETERS",
+                "occupancy": "BAY 52",
+                "city": "Amazeville",
+                "region1": "AL",
+                "postal_code": "12345",
+            },
+        ),
     ],
 )
 def test_parse_address(input: str, expected):

@@ -230,7 +230,7 @@ street_type_list = [
     "Avenue",
     "Avn",
     "Avnue",
-    "Bay",
+    "Bay(?!\ [1-9])",
     "Bayoo",
     "Bayou",
     "Bch",
