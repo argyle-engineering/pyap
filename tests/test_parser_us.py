@@ -405,6 +405,7 @@ def test_po_box_positive(input, expected):
     "input,expected",
     [
         # positive assertions
+        ("14001 E. ILIFF AVE 5-7TH FLOOR", True),
         ("1111 WILSON BVD STE 2222", True),
         ("800 W EL CAMINO REAL\n350 STE *", True),
         ("899 HEATHROW PARK LN", True),

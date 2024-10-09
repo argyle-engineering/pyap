@@ -831,7 +831,7 @@ floor_indic = r"""
 floor = r"""
             (?P<floor>
                 (?:
-                    \d+[A-Za-z]{{0,2}}\.?\ {floor_indic}
+                    (?:\d+|\d-\d)[A-Za-z]{{0,2}}\.?\ {floor_indic}
                 )
                 |
                 (?:
