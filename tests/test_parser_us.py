@@ -484,6 +484,7 @@ def test_po_box_positive(input, expected):
         ("817 S.E. 55TH", True),
         ("2817 PETERS ROAD BAY 52", True),
         # negative assertions
+        ("6 95 34 75 COMPANY PHONE IS", False),
         (", 666 Hell ST PMB 29700", False),
     ],
 )

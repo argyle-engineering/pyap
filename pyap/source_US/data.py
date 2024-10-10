@@ -122,7 +122,7 @@ In example below:
 street_name_multi_word_re = r"""
             (?:
                 \b[a-zA-Z0-9\ \.\-\'\’]{3,41}|\b[A-Z][A-Za-z]?(?=\ [A-Z])
-            )
+            )(?<![Pp][Hh][Oo][Nn][Ee])
 """
 
 # This pattern should be quite conservative because it will be followed by
