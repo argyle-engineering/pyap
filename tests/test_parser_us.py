@@ -207,6 +207,7 @@ def test_post_direction(input, expected):
     "input,expected",
     [
         # positive assertions
+        ("PK", True),
         ("Street", True),
         ("St.", True),
         ("Blvd.", True),
@@ -497,6 +498,7 @@ def test_full_street_positive(input, expected):
     "input,expected",
     [
         # positive assertions
+        ("2222 WASHINGTON PK SUITE 401  BRIDGEVILLE, PA 11111", True),
         ("1234 Avenue N, Rosenberg, Texas 77777", True),
         ("One Baylor Plaza MS: BCM204\nHouston TX 77030-3411", True),
         ("ONE ADP DRIVE\nMS CORP 003\nAUGUSTA, GA 30909", True),
