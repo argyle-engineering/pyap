@@ -572,6 +572,7 @@ street_type_list = [
     "Pikes",
     "Pine",
     "Pines",
+    "Pk",
     "Pkway",
     "Pkwy",
     "Pkwys",
