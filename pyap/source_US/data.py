@@ -182,24 +182,33 @@ single_street_name_list = [
     r"Black\ Hou?rse",
 ]
 
+numbered_road_re = r"""[Ss][Tt][Aa][Tt][Ee]\ [Rr][Oo][Aa][Dd]\ \d{1,4}(?!\d)"""
 
 # Used to handle edge cases where streets don't have a street type:
 # eg. `55 HIGHPOINT`, `600 HIGHWAY 32`
-single_street_name = r"""
-    (?P<single_street_name>
-        {single_street_name_regex}
-        |
-        [Aa][Tt]\ {interstate_street_type}
-        |
-        {highway_re}
-        |
-        {numbered_avenue_re}
+numbered_or_typeless_street_name = r"""
+    (?P<typeless_street_name>
+        (?:{post_direction_re}{space_div})?
+        (?:
+            {single_street_name_regex}
+            |
+            [Aa][Tt]\ {interstate_street_type}
+            |
+            {highway_re}
+            |
+            {numbered_avenue_re}
+            |
+            {numbered_road_re}
+        )
     )
 """.format(
+    post_direction_re=post_direction_re,
+    space_div=space_div,
     single_street_name_regex=str_list_to_upper_lower_regex(single_street_name_list),
     interstate_street_type=interstate_street_type,
     highway_re=highway_re,
     numbered_avenue_re=numbered_avenue_re,
+    numbered_road_re=numbered_road_re,
 )
 
 post_direction = r"""
@@ -964,9 +973,9 @@ full_street = r"""
                 (?:(?P<po_box_b>{po_box}){part_div})?
                 {street_number}{space_div}?
                 (?:
-                    (?:{typed_street_name}(?![A-Za-z\d\.]))
+                    (?:{numbered_or_typeless_street_name})
                     |
-                    (?:{single_street_name})
+                    (?:{typed_street_name}(?![A-Za-z\d\.]))
                     |
                     (?:
                         {post_direction_re}\ 
@@ -988,7 +997,7 @@ full_street = r"""
     part_div=part_div,
     street_number=street_number,
     typed_street_name=typed_street_name,
-    single_street_name=single_street_name,
+    numbered_or_typeless_street_name=numbered_or_typeless_street_name,
     post_direction=post_direction,
     post_direction_re=post_direction_re,
     floor=floor,
