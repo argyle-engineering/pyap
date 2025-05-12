@@ -907,6 +907,9 @@ occupancy = r"""
                             |
                             # Bay
                             [Bb][Aa][Yy]
+                            |
+                            # Site
+                            [Ss][Ii][Tt][Ee]
                         )\b[\ \,\.]+
                         (?:
                             [A-Za-z\#\&\-\d]{1,7}(?:\s?[SWNE])?
