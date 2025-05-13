@@ -1174,8 +1174,11 @@ city = r"""
 postal_code_re = r"""(?:\d{5}(?:\-\d{4})?(?!\d))"""
 postal_code = rf"""(?P<postal_code>{postal_code_re})"""
 
-country = r"""
-            (?:
+
+def make_country(idx: Optional[str] = None) -> str:
+    maybe_idx = f"_{idx}" if idx else ""
+    return rf"""
+            (?P<country{maybe_idx}>
                 [Uu]\.?[Ss]\.?(?:[Aa]\.?)?|
                 [Uu][Nn][Ii][Tt][Ee][Dd]\ [Ss][Tt][Aa][Tt][Ee][Ss](?:\ [Oo][Ff]\ [Aa][Mm][Ee][Rr][Ii][Cc][Aa])?
             )
@@ -1193,7 +1196,7 @@ def make_region1_postal_code(
 
     _postal_code = f"""(?:{part_div}|\-)? {postal_code}"""
     return rf"""
-            (?:{_indexed_region1("a")}?(?:{part_div}{country})?{_postal_code}{_indexed_region1("b")}?
+            (?:{_indexed_region1("a")}?(?:{part_div}{make_country("b")})?{_postal_code}{_indexed_region1("b")}?
             |{_indexed_region1("c")}(?![-,.\sA-Za-z]{{0,10}}{postal_code_re}))
         """
 
@@ -1207,7 +1210,7 @@ def make_full_address(
     part_div: str = part_div,
     city: str = city,
     region1_postal_code: str = region1_postal_code,
-    country: str = country,
+    country: Optional[str] = None,
     phone_number: str = phone_number,
 ) -> str:
 
@@ -1224,7 +1227,7 @@ def make_full_address(
         part_div=part_div,
         city=city,
         region1_postal_code=region1_postal_code,
-        country=country,
+        country=country or make_country("a"),
         phone_number=phone_number,
     )
 
