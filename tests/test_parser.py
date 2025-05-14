@@ -83,7 +83,7 @@ def test_combine_results():
     [
         ("No address here", None),
         (
-            "2590 Elm Road NE - Warren, OH 44483",
+            "2590 Elm Road NE - Warren, OH 44483, US",
             {
                 "street_number": "2590",
                 "street_name": "Elm",
@@ -92,7 +92,8 @@ def test_combine_results():
                 "city": "Warren",
                 "region1": "OH",
                 "postal_code": "44483",
-                "full_address": "2590 Elm Road NE - Warren, OH 44483",
+                "full_address": "2590 Elm Road NE - Warren, OH 44483, US",
+                "country": "US",
             },
         ),
         (

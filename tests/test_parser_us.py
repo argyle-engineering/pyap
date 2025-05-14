@@ -700,7 +700,7 @@ def test_region1(input, expected):
 )
 def test_country(input, expected):
     """test exact string match for country"""
-    execute_matching_test(input, expected, data_us.country)
+    execute_matching_test(input, expected, data_us.make_country("a"))
 
 
 @pytest.mark.parametrize(
