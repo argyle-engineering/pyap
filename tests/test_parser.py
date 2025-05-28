@@ -232,6 +232,33 @@ def test_parse_address(input: str, expected):
         assert expected is None
 
 
+@pytest.mark.parametrize(
+    "input,expected",
+    [
+        (
+            "1111, 101-3RD STR SW, CALGARY, ALBERTA, T2P3E6",
+            {
+                "street_number": "1111",
+                "street_type": "STR",
+                "street_name": "101-3RD",
+                "occupancy": None,
+                "city": "CALGARY",
+                "region1": "ALBERTA",
+                "postal_code": "T2P3E6",
+            },
+        ),
+    ],
+)
+def test_parse_address_canada(input: str, expected):
+    ap = parser.AddressParser(country="CA")
+    if result := ap.parse(input):
+        expected = expected or {}
+        received = {key: getattr(result[0], key) for key in expected}
+        assert received == expected
+    else:
+        assert expected is None
+
+
 def test_parse_po_box():
     ap = parser.AddressParser(country="US")
 
