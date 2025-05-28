@@ -280,7 +280,7 @@ street_type = r"""
                 [Rr][Uu][Nn]{div}|
                 [Ss][Ee][Nn][Tt][Ii][Ee][Rr]{div}|[Ss][Ee][Nn][Tt]{div}|
                 # Street
-                [Ss][Tt][Rr][Ee][Ee][Tt]{div}|[Ss][Tt](?![A-Za-z]){div}|[Ss][Tt][Rr](?![A-Za-z]){div}|
+                [Ss][Tt][Rr][Ee][Ee][Tt]{div}|[Ss][Tt]{div}|[Ss][Tt][Rr]{div}|
                 # Square
                 [Ss][Qq][Uu][Aa][Rr][Ee]{div}|[Ss][Qq]{div}|
                 [Ss][Uu][Bb][Dd][Ii][Vv][Ii][Ss][Ii][Oo][Nn]{div}|[Ss][Uu][Bb][Dd][Ii][Vv]{div}|
