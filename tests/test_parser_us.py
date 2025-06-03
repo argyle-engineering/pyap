@@ -125,6 +125,7 @@ def test_thousand(input, expected):
         ("32457 ", True),
         ("155-B ", True),
         ("25-C ", True),
+        ("5214F ", True),
         # negative assertions (words)
         ("ONE THousszz22and FIFTY and four onde", False),
         ("ONE one oNe and onE Three", False),

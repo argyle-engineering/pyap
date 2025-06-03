@@ -85,6 +85,7 @@ Street number can be written 2 ways:
    a) - "1022"
    b) - "85-1190"
    c) - "85 1190"
+   d) - 5214F
 """
 street_number = r"""(?P<street_number>
                         \b(?:
@@ -99,7 +100,7 @@ street_number = r"""(?P<street_number>
                             {ten_to_ninety}
                         ){from_to}
                         |
-                        (?:\b\d{from_to}(?:\-(?:\d{from_to}|[A-Z]))?\ )
+                        (?:\b\d{from_to}(?:\-?(?:\d{from_to}|[A-Z]))?\ )
                     )
                 """.format(
     thousand=thousand,
@@ -247,6 +248,7 @@ street_type_list = [
     "Bend",
     "Bg",
     "Bgs",
+    "Bl",
     "Blf",
     "Blfs",
     "Bluf",
@@ -988,7 +990,7 @@ full_street = r"""
                 (?:{space_div}{post_direction})?
                 (?:{part_div}{floor})?
                 (?:{part_div}{building})?
-                (?:{part_div}{occupancy})?
+                (?:{part_div}?{occupancy})?
                 (?:{part_div}{mail_stop})?
                 (?:{part_div}(?P<po_box_a>{po_box}))?
             )
