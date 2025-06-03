@@ -1,7 +1,7 @@
 # pyright: reportPrivateUsage=false
 # -*- coding: utf-8 -*-
 
-""" Test for parser classes """
+"""Test for parser classes"""
 
 import pytest
 from pyap import parser, exceptions, address, parse, parse_single_street
@@ -218,6 +218,30 @@ def test_combine_results():
                 "city": "Amazeville",
                 "region1": "AL",
                 "postal_code": "12345",
+            },
+        ),
+        (
+            "6325F OPAL HEIGHTS BL\nSAN FRANCISCO CA 94131",
+            {
+                "street_number": "6325F",
+                "street_type": "BL",
+                "street_name": "OPAL HEIGHTS",
+                "occupancy": None,
+                "city": "SAN FRANCISCO",
+                "region1": "CA",
+                "postal_code": "94131",
+            },
+        ),
+        (
+            "2744W GRANDIOSE WAY#100\nLEHI UT 84043",
+            {
+                "street_number": "2744W",
+                "street_type": "WAY",
+                "street_name": "GRANDIOSE",
+                "occupancy": "#100",
+                "city": "LEHI",
+                "region1": "UT",
+                "postal_code": "84043",
             },
         ),
     ],
