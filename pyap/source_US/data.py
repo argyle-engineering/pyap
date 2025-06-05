@@ -887,13 +887,15 @@ building = r"""
     ten_to_ninety=ten_to_ninety,
 )
 
+occupancy_details = r"(?:[A-Za-z\#\&\-\d]{1,7}(?:\s?[SWNE])?)"
+
 occupancy = r"""
             (?P<occupancy>
                 (?:
                     (?:
                         (?:
                             # Suite
-                            [Ss][Uu][Ii][Tt][Ee]|[Ss][Tt][Ee]?
+                            [Ss][Uu][Ii][Tt][Ee]
                             |
                             # Apartment
                             [Aa][Pp][Tt]|[Aa][Pp][Aa][Rr][Tt][Mm][Ee][Nn][Tt]
@@ -913,25 +915,33 @@ occupancy = r"""
                             # Site
                             [Ss][Ii][Tt][Ee]
                         )\b[\ \,\.]+
-                        (?:
-                            [A-Za-z\#\&\-\d]{1,7}(?:\s?[SWNE])?
-                        )?
+                        {occupancy_details}? 
                         |
-                        \d{2,4}\ [Ss][Tt][Ee](?:\ \*)?
+                        \d{{2,4}}\ [Ss][Tt][Ee](?:\ \*)?
                     )
                     |
                     (?:
-                        \#\ ?[0-9]{,4}[A-Za-z]{1}
+                        \#\ ?[0-9]{{,4}}[A-Za-z]{{1}}
                     )
                     |
                     (?:
-                        \#?\ ?[0-9]{1,4}
+                        \#?\ ?[0-9]{{1,4}}
                     )
                     |
-                    (?:\b\d{2}-\d{4})
+                    (?:\b\d{{2}}-\d{{4}})
+                    |
+                    (?:
+                        # Other Suite case
+                        # it needs to be separated to ensure `occupancy_details`
+                        # is present because otherwise it would match stuff like
+                        # the `ST.` in `ST. LOUIS`
+                        [Ss][Tt][Ee]?\b[\ \,\.]+{occupancy_details}
+                    )
                 )
             )
-            """
+            """.format(
+    occupancy_details=occupancy_details
+)
 
 mail_stop = r"""
             (?P<mail_stop>

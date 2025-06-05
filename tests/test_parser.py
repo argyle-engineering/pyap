@@ -244,6 +244,18 @@ def test_combine_results():
                 "postal_code": "84043",
             },
         ),
+        (
+            "532 N 9TH STREET\nST. LOUIS, MO 63101",
+            {
+                "street_number": "532",
+                "street_name": "N 9TH",
+                "street_type": "STREET",
+                "post_direction": None,
+                "city": "ST. LOUIS",
+                "region1": "MO",
+                "postal_code": "63101",
+            },
+        ),
     ],
 )
 def test_parse_address(input: str, expected):
