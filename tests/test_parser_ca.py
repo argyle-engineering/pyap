@@ -363,6 +363,7 @@ still finding correct matches in full_address
     "input,expected",
     [
         # positive assertions
+        ("1000 James Blvd, Gander, NL A1V 1W8 Canada", True),
         ("15979 Bow Bottom Trail SE, Calgary, AB T2J 6T5", True),
         ("1730 McPherson Crt. Unit 35, Pickering, ON", True),
         ("20 Fleeceline Road, Toronto, Ontario M8V 2K3", True),
@@ -489,6 +490,7 @@ def test_postal_code_negative(input, expected):
         ("Quebec", True),
         ("Québec", True),
         ("Territoires Du Nord-Ouest", True),
+        ("NL", True),
     ],
 )
 def test_region1(input, expected):
