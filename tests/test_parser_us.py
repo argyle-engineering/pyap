@@ -348,6 +348,7 @@ def test_building(input, expected):
         ("Bay 52", True),
         ("BAY 52", True),
         ("Site 123", True),
+        ("4E", True),
         # negative assertions
         ("suite900 ", False),
         ("Suite#2", False),
@@ -490,6 +491,7 @@ def test_po_box_positive(input, expected):
         ("666 Hell ST PMB 29700", True),
         ("817 S.E. 55TH", True),
         ("2817 PETERS ROAD BAY 52", True),
+        ("1234 Big Avenue 3B", True),
         # negative assertions
         ("6 95 34 75 COMPANY PHONE IS", False),
         (", 666 Hell ST PMB 29700", False),
