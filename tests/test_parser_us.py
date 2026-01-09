@@ -264,6 +264,7 @@ def test_typed_street_name(input, expected):
         ("floor 3", True),
         ("floor 11", True),
         ("floor 15", True),
+        ("floor #6", True),
         ("1st floor", True),
         ("2nd floor", True),
         ("15th floor", True),

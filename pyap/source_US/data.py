@@ -847,7 +847,7 @@ floor = r"""
                 )
                 |
                 (?:
-                    {floor_indic}\ \d+[A-Za-z]{{0,2}}
+                    {floor_indic}\ \#?\d+[A-Za-z]{{0,2}}
                 )
             )
         """.format(
