@@ -732,6 +732,7 @@ street_type_list = [
     "Tunnl",
     "Turnpike",
     "Turnpk",
+    "Twig",
     "Un",
     "Underpass",
     "Union",
