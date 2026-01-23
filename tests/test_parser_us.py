@@ -156,6 +156,7 @@ def test_street_number(input, expected):
         ("Smith’s mill road", True),
         ("Smith's mill road", True),
         ("E MOUNT GARFIELD ROAD", True),
+        ("THE BENT TWIG", True),
         # negative assertions
         ("Jean Baptiste Point du Sable Lake Shore Alternative", False),
         ("a", False),
@@ -396,6 +397,7 @@ def test_mail_stop(input, expected):
         ("pmb #29700", True),
         ("PO Box # A3656", True),
         ("PO Drawer J", True),
+        ("P.O. 9774", True),
         # negative assertions
         ("po box108 ", False),
         ("PoBox53485 ", False),
@@ -618,6 +620,7 @@ def test_full_street_positive(input, expected):
         ("135 Pinelawn Road STE 130 S, Melville, NY 11747", True),
         ("1800 M STREET NW SUITE 375 N, WASHINGTON, DC 20036", True),
         ("10 INDIAN BAY, ALAMEDA CA 94502", True),
+        ("1234 THE BENT TWIG JOHNS ISLAND, KY 40207", True),
         # negative assertions
         ("ONE HEALING CENTER LLC, 16444", False),
         ("85 STEEL REGULAR SHAFT - NE", False),
