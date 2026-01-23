@@ -309,3 +309,8 @@ def test_parse_po_box():
 
     address = ap.parse_single_street("P.O. BOX 99999")[0]
     assert address.po_box == "P.O. BOX 99999"
+
+    address = ap.parse_single_street(
+        "IRS OGDEN PAYROLL CENTER MAIL STOP 9999 P.O. 1234 OGDEN UT 84409"
+    )[0]
+    assert address.po_box == "P.O. 1234"

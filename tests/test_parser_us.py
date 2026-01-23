@@ -396,6 +396,7 @@ def test_mail_stop(input, expected):
         ("pmb #29700", True),
         ("PO Box # A3656", True),
         ("PO Drawer J", True),
+        ("P.O. 9774", True),
         # negative assertions
         ("po box108 ", False),
         ("PoBox53485 ", False),
