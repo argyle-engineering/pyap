@@ -304,27 +304,31 @@ full_street = r"""
         (?:
             (?P<full_street>
     
-                (?:
-                    {po_box} {part_divider}?  # TODO: maybe remove the '?' on the part_dividers is mismatch address parts 
-                )?
-                (?:
-                    {floor} {part_divider}?
-                )?
-                (?:
-                    {occupancy} {part_divider}?
-                )?
-                (?:
-                    {building} {part_divider}?
-                )?
+                (?P<line2>
+                    (?:
+                        {po_box} {part_divider}?  # TODO: maybe remove the '?' on the part_dividers is mismatch address parts 
+                    )?
+                    (?:
+                        {floor} {part_divider}?
+                    )?
+                    (?:
+                        {occupancy} {part_divider}?
+                    )?
+                    (?:
+                        {building} {part_divider}?
+                    )?
+                )
                 
-                (?:
-                    (?: {street_number} {space} )
-                    |
-                    (?! \d{{}} ) 
-                    
-                )?
-                (?:{street_name} )
-                (?:{space} {street_type} {space}?)? 
+                (?P<line1>
+                    (?:
+                        (?: {street_number} {space} )
+                        |
+                        (?! \d{{}} ) 
+                        
+                    )?
+                    (?:{street_name} )
+                    (?:{space} {street_type} {space}?)? 
+                )
             )
         )  # end full_street
 """.format(
