@@ -23,6 +23,8 @@ class Address:
     country_id: str
     full_street: str
     full_address: str
+    line1: str
+    line2: Union[str, None] = None
     city: Union[str, None] = None
     floor: Union[str, None] = None
     region1: Union[str, None] = None
@@ -44,9 +46,9 @@ class Address:
         for s_field in self.__dataclass_fields__:
             field = getattr(self, s_field)
             if isinstance(field, str):
-                setattr(self, s_field, field.strip(" ,;:"))
+                setattr(self, s_field, field.strip(" ,;:\n"))
             elif isinstance(field, list) and field and isinstance(field[0], str):
-                setattr(self, s_field, field[0].strip(" ,;:"))
+                setattr(self, s_field, field[0].strip(" ,;:\n"))
 
     def __repr__(self) -> str:
         # Address object is represented as textual address

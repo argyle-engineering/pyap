@@ -43,6 +43,7 @@ def test_address_class_init():
         city="CityVille, ",
         full_street="Street 1b",
         full_address="Street 1b CityVille USA",
+        line1="Street 1b",
     )
     assert addr.region1 == "USA"
 
@@ -94,6 +95,8 @@ def test_combine_results():
                 "postal_code": "44483",
                 "full_address": "2590 Elm Road NE - Warren, OH 44483, US",
                 "country": "US",
+                "line1": "2590 Elm Road NE",
+                "line2": "",
             },
         ),
         (
@@ -106,6 +109,8 @@ def test_combine_results():
                 "region1": "FL",
                 "postal_code": "32746",
                 "full_address": "899 HEATHROW PARK LN 02-2135\nLAKE MARY, FL 32746",
+                "line1": "899 HEATHROW PARK LN",
+                "line2": "02-2135",
             },
         ),
         (
@@ -119,6 +124,8 @@ def test_combine_results():
                 "region1": "FL",
                 "postal_code": "32547",
                 "full_address": "696 BEAL PKWY NW\nFT WALTON BCH FL 32547",
+                "line1": "696 BEAL PKWY NW",
+                "line2": "",
             },
         ),
         (
@@ -134,6 +141,8 @@ def test_combine_results():
                 "full_address": (
                     "225 E. John Carpenter Freeway, Suite 1500 Irving, Texas 75062"
                 ),
+                "line1": "225 E. John Carpenter Freeway",
+                "line2": "Suite 1500",
             },
         ),
         (
@@ -146,6 +155,8 @@ def test_combine_results():
                 "region1": None,
                 "postal_code": "49441",
                 "full_address": "1300 E MOUNT GARFIELD ROAD, NORTON SHORES 49441",
+                "line1": "1300 E MOUNT GARFIELD ROAD",
+                "line2": "",
             },
         ),
         (
@@ -158,6 +169,8 @@ def test_combine_results():
                 "city": "Richfield",
                 "region1": "MN",
                 "postal_code": "55423",
+                "line1": "7601 Penn Avenue South",
+                "line2": "",
             },
         ),
         (
@@ -169,6 +182,8 @@ def test_combine_results():
                 "city": "LOS ANGELES",
                 "region1": "CA",
                 "postal_code": None,
+                "line1": "242 N AVENUE 25",
+                "line2": "SUITE 300",
             },
         ),
         (
@@ -181,6 +196,8 @@ def test_combine_results():
                 "city": "San Ramon",
                 "region1": "CA",
                 "postal_code": "94583-2176",
+                "line1": "2633 Camino Ramon",
+                "line2": "Ste. 400",
             },
         ),
         (
@@ -194,6 +211,8 @@ def test_combine_results():
                 "region1": "KS",
                 "po_box": "PO Drawer J",
                 "postal_code": "67530",
+                "line1": "2006 Broadway Ave",
+                "line2": "Suite 2A, PO Drawer J",
             },
         ),
         (
@@ -206,6 +225,8 @@ def test_combine_results():
                 "city": "Houston",
                 "region1": "TX",
                 "postal_code": "77030-3411",
+                "line1": "One Baylor Plaza",
+                "line2": "MS: BCM204",
             },
         ),
         (
@@ -218,6 +239,8 @@ def test_combine_results():
                 "city": "Amazeville",
                 "region1": "AL",
                 "postal_code": "12345",
+                "line1": "2817 PETERS ROAD",
+                "line2": "BAY 52",
             },
         ),
         (
@@ -230,6 +253,8 @@ def test_combine_results():
                 "city": "SAN FRANCISCO",
                 "region1": "CA",
                 "postal_code": "94131",
+                "line1": "6325F OPAL HEIGHTS BL",
+                "line2": "",
             },
         ),
         (
@@ -242,6 +267,8 @@ def test_combine_results():
                 "city": "LEHI",
                 "region1": "UT",
                 "postal_code": "84043",
+                "line1": "2744W GRANDIOSE WAY",
+                "line2": "#100",
             },
         ),
         (
@@ -254,6 +281,8 @@ def test_combine_results():
                 "city": "ST. LOUIS",
                 "region1": "MO",
                 "postal_code": "63101",
+                "line1": "532 N 9TH STREET",
+                "line2": "",
             },
         ),
     ],

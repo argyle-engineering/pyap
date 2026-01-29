@@ -431,31 +431,38 @@ full_street = r"""
         # Format commonly used in French
         (?P<full_street_b>
 
-            {street_number_b}{div}
-            {street_type_b}{div}
-            ({street_name_b} {po_box_positive_lookahead})?\,?\ ?
-            {post_direction_b}?\,?\ ?
-            {po_box_b}?\,?\ ?
+            (?P<line1_b>
+                {street_number_b}{div}
+                {street_type_b}{div}
+                ({street_name_b} {po_box_positive_lookahead})?\,?\ ?
+                {post_direction_b}?\,?\ ?
+                {po_box_b}?\,?\ ?
+            )
         )
         |
         # Format commonly used in English
         (?P<full_street>
 
-            {street_number}\,?\ ?
-            {street_name}?\,?\ ?
-            (?:(?<=[\ \,]){street_type})\,?\ ?
-            {post_direction}?\,?\ ?
-            {floor}?\,?\ ?
+            (?P<line1>
+                {street_number}\,?\ ?
+                {street_name}?\,?\ ?
+                (?:(?<=[\ \,]){street_type})\,?\ ?
+                {post_direction}?
+            )
+            \,?\ ?
+            (?P<line2>
+                {floor}?\,?\ ?
 
-            (?P<building_id>
-                {building}
-            )?\,?\ ?
+                (?P<building_id>
+                    {building}
+                )?\,?\ ?
 
-            (?P<occupancy>
-                {occupancy}
-            )?\,?\ ?
+                (?P<occupancy>
+                    {occupancy}
+                )?\,?\ ?
 
-            {po_box}?
+                {po_box}?
+            )
         )
     )""".format(
     street_number=street_number,
