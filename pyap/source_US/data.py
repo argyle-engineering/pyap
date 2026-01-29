@@ -181,6 +181,7 @@ single_street_name_list = [
     "Highpoint",
     "Parkway",
     r"Black\ Hou?rse",
+    r"Route",
 ]
 
 numbered_road_re = r"""[Ss][Tt][Aa][Tt][Ee]\ [Rr][Oo][Aa][Dd]\ \d{1,4}(?!\d)"""
