@@ -187,7 +187,7 @@ single_street_name_list = [
 numbered_road_re = r"""[Ss][Tt][Aa][Tt][Ee]\ [Rr][Oo][Aa][Dd]\ \d{1,4}(?!\d)"""
 
 # Capture "Blvd of the Americas", "Ave of the Stars"
-street_of_re = r"""(?:(?:[Aa][Vv][Ee]\.?|[Aa][Vv][Ee][Nn][Uu][Ee]|[Bb][Ll][Vv][Dd]\.?|[Bb][Oo][Uu][Ll][Ee][Vv][Aa][Rr][Dd])\ [Oo][Ff]\ (?:[Tt][Hh][Ee]\ )?[a-zA-Z0-9\ \.\-\'\’]+)"""
+street_of_re = r"""(?:[a-zA-Z]{2,15}\.?\ [Oo][Ff]\ [Tt][Hh][Ee] [a-zA-Z0-9\ \.\-\'\’]+)"""
 
 # Used to handle edge cases where streets don't have a street type:
 # eg. `55 HIGHPOINT`, `600 HIGHWAY 32`
