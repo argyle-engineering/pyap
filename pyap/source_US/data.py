@@ -128,7 +128,7 @@ street_name_multi_word_re = r"""
 
 # This pattern should be quite conservative because it will be followed by
 # optional matchers - we want to avoid matching too much with this.
-street_name_one_word_re = r"(?:[A-Z][A-Za-z]{,15})"
+street_name_one_word_re = r"(?:(?:[Oo][Ff]\ (?:[Tt][Hh][Ee]\ )?)?[A-Za-z]{,15})"
 
 
 interstate_specs = [
@@ -784,7 +784,7 @@ street_type_list = [
     "Xrds",
 ]
 
-street_type_leading_list = ["Camino", "El\ Camino", "Avenue"]
+street_type_leading_list = ["Camino", "El\ Camino", "Avenue", "Blvd", "Ave"]
 
 
 def street_type_list_to_regex(street_type_list: list[str]) -> str:
@@ -900,7 +900,7 @@ occupancy = r"""
                             [Ss][Uu][Ii][Tt][Ee]
                             |
                             # Apartment
-                            [Aa][Pp][Tt]|[Aa][Pp][Aa][Rr][Tt][Mm][Ee][Nn][Tt]
+                            (?:[Aa][Pp][Tt]\#[\ \.]+)?(?:[Aa][Pp][Tt]|[Aa][Pp][Aa][Rr][Tt][Mm][Ee][Nn][Tt])
                             |
                             # Room
                             [Rr][Oo][Oo][Mm]|[Rr][Mm]
