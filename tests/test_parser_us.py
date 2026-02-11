@@ -351,6 +351,7 @@ def test_building(input, expected):
         ("BAY 52", True),
         ("Site 123", True),
         ("4E", True),
+        ("apt# apt 123", True),
         # negative assertions
         ("suite900 ", False),
         ("Suite#2", False),
