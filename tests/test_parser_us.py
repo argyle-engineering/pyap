@@ -644,6 +644,7 @@ def test_full_street_positive(input, expected):
         ("00 Straight Fit Jean, USA", False),
         ("123 Curvy Way, Littleville, USA", False),
         ("400 blvd of the americas\nste 401\nlakewood nj 08701", True),
+        ("400 ave of the stars\nlakewood nj 08701", True),
         ("930 laurel breeze dr\napt# apt 308\nknightdale nc 27545", True),
     ],
 )

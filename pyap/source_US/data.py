@@ -128,7 +128,7 @@ street_name_multi_word_re = r"""
 
 # This pattern should be quite conservative because it will be followed by
 # optional matchers - we want to avoid matching too much with this.
-street_name_one_word_re = r"(?:[A-Z][A-Za-z]{,15})"
+street_name_one_word_re = r"(?:(?:[Oo][Ff]\ (?:[Tt][Hh][Ee]\ )?)?[A-Za-z]{,15})"
 
 
 interstate_specs = [
@@ -186,19 +186,12 @@ single_street_name_list = [
 
 numbered_road_re = r"""[Ss][Tt][Aa][Tt][Ee]\ [Rr][Oo][Aa][Dd]\ \d{1,4}(?!\d)"""
 
-# Capture "Blvd of the Americas", "Ave of the Stars"
-street_of_re = (
-    r"""(?:[a-zA-Z]{2,15}\.?\ [Oo][Ff]\ [Tt][Hh][Ee] [a-zA-Z0-9\ \.\-\'\’]+)"""
-)
-
 # Used to handle edge cases where streets don't have a street type:
 # eg. `55 HIGHPOINT`, `600 HIGHWAY 32`
 numbered_or_typeless_street_name = r"""
     (?P<typeless_street_name>
         (?:{post_direction_re}{space_div})?
         (?:
-            {street_of_re}
-            |
             {single_street_name_regex}
             |
             [Aa][Tt]\ {interstate_street_type}
@@ -213,7 +206,6 @@ numbered_or_typeless_street_name = r"""
 """.format(
     post_direction_re=post_direction_re,
     space_div=space_div,
-    street_of_re=street_of_re,
     single_street_name_regex=str_list_to_upper_lower_regex(single_street_name_list),
     interstate_street_type=interstate_street_type,
     highway_re=highway_re,
@@ -792,7 +784,7 @@ street_type_list = [
     "Xrds",
 ]
 
-street_type_leading_list = ["Camino", "El\ Camino", "Avenue"]
+street_type_leading_list = ["Camino", "El\ Camino", "Avenue", "Blvd", "Ave"]
 
 
 def street_type_list_to_regex(street_type_list: list[str]) -> str:
@@ -908,7 +900,7 @@ occupancy = r"""
                             [Ss][Uu][Ii][Tt][Ee]
                             |
                             # Apartment
-                            [Aa][Pp][Tt](?:[\#\ \.]+[Aa][Pp][Tt])?|[Aa][Pp][Aa][Rr][Tt][Mm][Ee][Nn][Tt]
+                            (?:[Aa][Pp][Tt]\#[\ \.]+)?(?:[Aa][Pp][Tt]|[Aa][Pp][Aa][Rr][Tt][Mm][Ee][Nn][Tt])
                             |
                             # Room
                             [Rr][Oo][Oo][Mm]|[Rr][Mm]
