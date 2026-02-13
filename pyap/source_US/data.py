@@ -900,7 +900,7 @@ occupancy = r"""
                             [Ss][Uu][Ii][Tt][Ee]
                             |
                             # Apartment
-                            (?:[Aa][Pp][Tt]\#[\ \.]+)?(?:[Aa][Pp][Tt]|[Aa][Pp][Aa][Rr][Tt][Mm][Ee][Nn][Tt])
+                            (?:[Aa][Pp][Tt]\#[\ \.]+)?(?:[Aa][Pp][Tt]?|[Aa][Pp][Aa][Rr][Tt][Mm][Ee][Nn][Tt])
                             |
                             # Room
                             [Rr][Oo][Oo][Mm]|[Rr][Mm]
