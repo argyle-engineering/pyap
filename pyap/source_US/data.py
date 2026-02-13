@@ -916,6 +916,9 @@ occupancy = r"""
                             |
                             # Site
                             [Ss][Ii][Tt][Ee]
+                            |
+                            # Space
+                            [Ss][Pp][Cc]|[Ss][Pp][Aa][Cc][Ee]
                         )\b[\ \,\.]+
                         {occupancy_details}? 
                         |

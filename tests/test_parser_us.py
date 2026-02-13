@@ -352,6 +352,8 @@ def test_building(input, expected):
         ("Site 123", True),
         ("4E", True),
         ("apt# apt 123", True),
+        ("SPC 42", True),
+        ("Space 13", True),
         # negative assertions
         ("suite900 ", False),
         ("Suite#2", False),
@@ -647,6 +649,7 @@ def test_full_street_positive(input, expected):
         ("400 blvd of the americas\nste 401\nlakewood nj 08701", True),
         ("400 ave of the stars\nlakewood nj 08701", True),
         ("930 laurel breeze dr\napt# apt 308\nknightdale nc 27545", True),
+        ("1234 PEDDY RD SPC   42,RIVERSIDE,CA,92509", True),
     ],
 )
 def test_full_address(input, expected):
