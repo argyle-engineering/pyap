@@ -161,11 +161,11 @@ post_direction_re = r"""
                         [Ww][Ee][Ss][Tt]
                     )
                     |
-                    \b(?:NW|NE|SW|SE)\b
+                    \b(?:[Nn][Ww]|[Nn][Ee]|[Ss][Ww]|[Ss][Ee])\b
                     |
-                    \b(?:N\.W\.|N\.E\.|S\.W\.|S\.E\.)
+                    \b(?:[Nn]\.[Ww]\.|[Nn]\.[Ee]\.|[Ss]\.[Ww]\.|[Ss]\.[Ee]\.)
                     |
-                    \b(?:N|S|E|W)\b\.?
+                    \b(?:[Nn]|[Ss]|[Ee]|[Ww])\b\.?
                 )
                 """
 
@@ -1000,18 +1000,25 @@ full_street = r"""
             (?:
                 (?P<line1>
                     (?:(?P<po_box_b>{po_box}){part_div})?
-                    {street_number}{space_div}?
                     (?:
-                        (?:{numbered_or_typeless_street_name})
-                        |
-                        (?:{typed_street_name}(?![A-Za-z\d\.]))
-                        |
+                        {street_number}{space_div}?
                         (?:
-                            {post_direction_re}\ 
-                            \d{{,3}}[A-Za-z\-]{{1,31}}
+                            (?:{numbered_or_typeless_street_name})
+                            |
+                            (?:{typed_street_name}(?![A-Za-z\d\.]))
+                            |
+                            (?:
+                                {post_direction_re}\ 
+                                \d{{,3}}[A-Za-z\-]{{1,31}}
+                            )
                         )
+                        (?:{space_div}{post_direction})?
                     )
-                    (?:{space_div}{post_direction})?
+                    |
+                    (?:
+                        \d{{1,4}}{space_div}{post_direction_re}{space_div}
+                        \d{{1,4}}{space_div}{post_direction_re}
+                    )
                 )
                 (?P<line2>
                     (?:{part_div}{floor})?
