@@ -653,6 +653,7 @@ def test_full_street_positive(input, expected):
         ("1234 N Front Street\nSuite 3 South\nHarrisburg, PA 17102", True),
         ("206 La Rue France, Lafayette, LA, 70508", True),
         ("1234 Fowlstown Rd Lot#18 \nBainbridge, GA  39817", True),
+        ("1234 LONG LANE\nB2 \nUPPER DARBY PA 19082", True),
         # negative assertions
         ("ONE HEALING CENTER LLC, 16444", False),
         ("85 STEEL REGULAR SHAFT - NE", False),
