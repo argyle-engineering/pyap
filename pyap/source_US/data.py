@@ -789,7 +789,12 @@ street_type_list = [
     "Xrds",
 ]
 
-street_type_leading_list = ["Camino", "El\ Camino", "Avenue", "Blvd", "Ave",
+street_type_leading_list = [
+    "Camino",
+    "El\ Camino",
+    "Avenue",
+    "Blvd",
+    "Ave",
     "La\ Rue",
     "Rue",
 ]
