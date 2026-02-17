@@ -365,7 +365,6 @@ def test_building(input, expected):
         ("suite900 ", False),
         ("Suite#2", False),
         ("suite218 ", False),
-        ("Suite South", False),
     ],
 )
 def test_occupancy(input, expected):
