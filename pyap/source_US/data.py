@@ -902,10 +902,11 @@ building = r"""
     ten_to_ninety=ten_to_ninety,
 )
 
-occupancy_details = r"(?:[A-Za-z\#\&\-\d]{{1,7}}(?:\s?{post_direction_re})?)".format(
-    post_direction_re=post_direction_re
+occupancy_details = (
+    r"(?:(?:\#\ )?[A-Za-z\#\&\-\d]{{1,7}}(?:\s?{post_direction_re})?)".format(
+        post_direction_re=post_direction_re
+    )
 )
-
 occupancy = r"""
             (?P<occupancy>
                 (?:
@@ -934,7 +935,10 @@ occupancy = r"""
                             |
                             # Space
                             [Ss][Pp][Cc]|[Ss][Pp][Aa][Cc][Ee]
-                        )\b[\ \,\.]+
+                            |
+                            # Lot
+                            [Ll][Oo][Tt]
+                        )\b[\ \,\.]*
                         {occupancy_details}? 
                         |
                         \d{{2,4}}\ [Ss][Tt][Ee](?:\ \*)?
@@ -956,6 +960,11 @@ occupancy = r"""
                         # is present because otherwise it would match stuff like
                         # the `ST.` in `ST. LOUIS`
                         [Ss][Tt][Ee]?\b[\ \,\.]+{occupancy_details}
+                    )
+                    |
+                    (?:
+                        #Block abbreviated as B
+                        [Bb]\d{{1,4}}
                     )
                 )
             )
@@ -1267,7 +1276,6 @@ def make_full_address(
     country: Optional[str] = None,
     phone_number: str = phone_number,
 ) -> str:
-
     return r"""
                 (?P<full_address>
                     {full_street}
