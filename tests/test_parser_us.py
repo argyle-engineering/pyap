@@ -358,10 +358,14 @@ def test_building(input, expected):
         ("Space 13", True),
         ("Ap B5", True),
         ("Ap 5", True),
+        ("Suite 3 South", True),
+        ("Suite 3 North", True),
+        ("Suite 4 Northeast", True),
         # negative assertions
         ("suite900 ", False),
         ("Suite#2", False),
         ("suite218 ", False),
+        ("Suite South", False),
     ],
 )
 def test_occupancy(input, expected):
