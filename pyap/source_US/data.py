@@ -894,7 +894,23 @@ building = r"""
     ten_to_ninety=ten_to_ninety,
 )
 
-occupancy_details = r"(?:[A-Za-z\#\&\-\d]{1,7}(?:\s?[SWNE])?)"
+occupancy_details = r"""
+    (?:
+        [A-Za-z\#\&\-\d]{1,7}
+        (?:
+            \s?
+            (?:
+                [NSEW]
+                |
+                NE|NW|SE|SW
+                |
+                North|South|East|West
+                |
+                Northeast|Northwest|Southeast|Southwest
+            )
+        )?
+    )
+"""
 
 occupancy = r"""
             (?P<occupancy>
