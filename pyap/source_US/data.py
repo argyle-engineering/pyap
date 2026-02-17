@@ -159,7 +159,7 @@ post_direction_re = r"""
                         [Ss][Oo][Uu][Tt][Hh]|
                         [Ee][Aa][Ss][Tt]|
                         [Ww][Ee][Ss][Tt]
-                    )
+                    ){1,2}
                     |
                     \b(?:[Nn][Ww]|[Nn][Ee]|[Ss][Ww]|[Ss][Ee])\b
                     |
