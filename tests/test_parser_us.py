@@ -358,6 +358,9 @@ def test_building(input, expected):
         ("Space 13", True),
         ("Ap B5", True),
         ("Ap 5", True),
+        ("Suite 3 South", True),
+        ("Suite 3 North", True),
+        ("Suite 4 Northeast", True),
         # negative assertions
         ("suite900 ", False),
         ("Suite#2", False),
@@ -641,6 +644,7 @@ def test_full_street_positive(input, expected):
         ("123 w 456 s mighey, IN  46953", True),
         ("123 Route 75 STE 155 Toms River, NJ 08755", True),
         ("1234 WOODMONT DRIVE NORTHWEST APT# APT F-15 LENOIR NC 28645", True),
+        ("1234 N Front Street\nSuite 3 South\nHarrisburg, PA 17102", True),
         # negative assertions
         ("ONE HEALING CENTER LLC, 16444", False),
         ("85 STEEL REGULAR SHAFT - NE", False),

@@ -894,7 +894,9 @@ building = r"""
     ten_to_ninety=ten_to_ninety,
 )
 
-occupancy_details = r"(?:[A-Za-z\#\&\-\d]{1,7}(?:\s?[SWNE])?)"
+occupancy_details = r"(?:[A-Za-z\#\&\-\d]{{1,7}}(?:\s?{post_direction_re})?)".format(
+    post_direction_re=post_direction_re
+)
 
 occupancy = r"""
             (?P<occupancy>
