@@ -503,6 +503,7 @@ def test_po_box_positive(input, expected):
         ("15 ROUTE 9H", True),
         ("123 w 456 s", True),
         ("123 SE 4 NE", True),
+        ("123 Route 70", True),
         # negative assertions
         ("6 95 34 75 COMPANY PHONE IS", False),
         (", 666 Hell ST PMB 29700", False),
@@ -635,6 +636,7 @@ def test_full_street_positive(input, expected):
         ("1234 PEDDY RD SPC   42,RIVERSIDE,CA,92509", True),
         ("123 Blackwood street Ap B5 Philadelphia, PA 19116", True),
         ("123 w 456 s mighey, IN  46953", True),
+        ("123 Route 75 STE 155 Toms River, NJ 08755", True),
         # negative assertions
         ("ONE HEALING CENTER LLC, 16444", False),
         ("85 STEEL REGULAR SHAFT - NE", False),
