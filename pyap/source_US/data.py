@@ -1,17 +1,17 @@
 # -*- coding: utf-8 -*-
 
 """
-    pyap.source_US.data
-    ~~~~~~~~~~~~~~~~~~~~
+pyap.source_US.data
+~~~~~~~~~~~~~~~~~~~~
 
-    This module provides regular expression definitions required for
-    detecting US addresses.
+This module provides regular expression definitions required for
+detecting US addresses.
 
-    The module is expected to always contain 'full_address' variable containing
-    all address parsing definitions.
+The module is expected to always contain 'full_address' variable containing
+all address parsing definitions.
 
-    :copyright: (c) 2015 by Vladimir Goncharov.
-    :license: MIT, see LICENSE for more details.
+:copyright: (c) 2015 by Vladimir Goncharov.
+:license: MIT, see LICENSE for more details.
 """
 
 import string
@@ -934,12 +934,6 @@ occupancy = r"""
                             |
                             # Space
                             [Ss][Pp][Cc]|[Ss][Pp][Aa][Cc][Ee]
-                            |
-                            # Lot 
-                            [Ll][Oo][Tt]\#\d{{1,4}}
-                            |
-                            #Block abbreviated as B
-                            [Bb]\d{{1,4}}
                         )\b[\ \,\.]+
                         {occupancy_details}? 
                         |
@@ -963,6 +957,13 @@ occupancy = r"""
                         # the `ST.` in `ST. LOUIS`
                         [Ss][Tt][Ee]?\b[\ \,\.]+{occupancy_details}
                     )
+                    |
+                    (?:
+                        # Lot 
+                        [Ll][Oo][Tt]\#\d{{1,4}}
+                        |
+                        #Block abbreviated as B
+                        [Bb]\d{{1,4}})
                 )
             )
             """.format(
@@ -1273,7 +1274,6 @@ def make_full_address(
     country: Optional[str] = None,
     phone_number: str = phone_number,
 ) -> str:
-
     return r"""
                 (?P<full_address>
                     {full_street}

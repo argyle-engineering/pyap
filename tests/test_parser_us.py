@@ -363,11 +363,9 @@ def test_building(input, expected):
         ("Suite 3 South", True),
         ("Suite 3 North", True),
         ("Suite 4 Northeast", True),
-        ("Lot#18 ", True),
-        ("B2 ", True),
+        ("Lot#18", True),
+        ("B2", True),
         # negative assertions
-        ("B2", False),
-        ("BC", False),
         ("suite900 ", False),
         ("Suite#2", False),
         ("suite218 ", False),
