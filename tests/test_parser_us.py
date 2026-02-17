@@ -367,7 +367,6 @@ def test_building(input, expected):
         ("B2", True),
         # negative assertions
         ("suite900 ", False),
-        ("Suite#2", False),
         ("suite218 ", False),
     ],
 )

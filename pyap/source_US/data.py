@@ -934,7 +934,10 @@ occupancy = r"""
                             |
                             # Space
                             [Ss][Pp][Cc]|[Ss][Pp][Aa][Cc][Ee]
-                        )\b[\ \,\.]+
+                            |
+                            # Lot
+                            [Ll][Oo][Tt]
+                        )\b[\ \,\.]*
                         {occupancy_details}? 
                         |
                         \d{{2,4}}\ [Ss][Tt][Ee](?:\ \*)?
@@ -961,11 +964,6 @@ occupancy = r"""
                     (?:
                         #Block abbreviated as B
                         [Bb]\d{{1,4}}
-                    )
-                    |
-                    (?:
-                        #Lot
-                        [Ll][Oo][Tt]\#\d{{1,4}}
                     )
                 )
             )
