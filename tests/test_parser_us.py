@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-""" Test for USA address parser """
+"""Test for USA address parser"""
 
 import re
 import pytest
@@ -236,6 +236,7 @@ def test_post_direction(input, expected):
         ("I- 35", True),
         ("I-35 Service Road", True),
         ("BAY", True),
+        ("Rue", True),
         # negative assertions
         # TODO
     ],
@@ -251,6 +252,7 @@ def test_street_type(input, expected):
         # positive assertions
         ("ED DR", True),
         ("El Camino Real", True),
+        ("La Rue", True),
         # negative assertions
         ("Camino Del Toro Loco", False),
     ],
@@ -645,6 +647,7 @@ def test_full_street_positive(input, expected):
         ("123 Route 75 STE 155 Toms River, NJ 08755", True),
         ("1234 WOODMONT DRIVE NORTHWEST APT# APT F-15 LENOIR NC 28645", True),
         ("1234 N Front Street\nSuite 3 South\nHarrisburg, PA 17102", True),
+        ("206 La Rue France, Lafayette, LA, 70508", True),
         # negative assertions
         ("ONE HEALING CENTER LLC, 16444", False),
         ("85 STEEL REGULAR SHAFT - NE", False),
