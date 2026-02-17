@@ -363,7 +363,11 @@ def test_building(input, expected):
         ("Suite 3 South", True),
         ("Suite 3 North", True),
         ("Suite 4 Northeast", True),
+        ("Lot#18 ", True),
+        ("B2 ", True),
         # negative assertions
+        ("B2", False),
+        ("BC", False),
         ("suite900 ", False),
         ("Suite#2", False),
         ("suite218 ", False),
@@ -648,6 +652,7 @@ def test_full_street_positive(input, expected):
         ("1234 WOODMONT DRIVE NORTHWEST APT# APT F-15 LENOIR NC 28645", True),
         ("1234 N Front Street\nSuite 3 South\nHarrisburg, PA 17102", True),
         ("206 La Rue France, Lafayette, LA, 70508", True),
+        ("1234 Fowlstown Rd Lot#18 \nBainbridge, GA  39817", True),
         # negative assertions
         ("ONE HEALING CENTER LLC, 16444", False),
         ("85 STEEL REGULAR SHAFT - NE", False),
