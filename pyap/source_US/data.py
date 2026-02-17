@@ -159,7 +159,7 @@ post_direction_re = r"""
                         [Ss][Oo][Uu][Tt][Hh]|
                         [Ee][Aa][Ss][Tt]|
                         [Ww][Ee][Ss][Tt]
-                    )
+                    ){1,2}
                     |
                     \b(?:[Nn][Ww]|[Nn][Ee]|[Ss][Ww]|[Ss][Ee])\b
                     |
@@ -186,6 +186,8 @@ single_street_name_list = [
 
 numbered_road_re = r"""[Ss][Tt][Aa][Tt][Ee]\ [Rr][Oo][Aa][Dd]\ \d{1,4}(?!\d)"""
 
+numbered_route_re = r"""[Rr][Oo][Uu][Tt][Ee]\ \d{1,4}(?!\d)"""
+
 # Used to handle edge cases where streets don't have a street type:
 # eg. `55 HIGHPOINT`, `600 HIGHWAY 32`
 numbered_or_typeless_street_name = r"""
@@ -201,6 +203,8 @@ numbered_or_typeless_street_name = r"""
             {numbered_avenue_re}
             |
             {numbered_road_re}
+            |
+            {numbered_route_re}
         )
     )
 """.format(
@@ -211,6 +215,7 @@ numbered_or_typeless_street_name = r"""
     highway_re=highway_re,
     numbered_avenue_re=numbered_avenue_re,
     numbered_road_re=numbered_road_re,
+    numbered_route_re=numbered_route_re,
 )
 
 post_direction = r"""
