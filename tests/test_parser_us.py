@@ -176,6 +176,8 @@ def test_street_name(input, expected):
         ("Parkway", True),
         ("STATE ROAD 123", True),
         ("W. STATE ROAD 123", True),
+        ("Alt 123", True),
+        ("Alternate 123", True),
         # negative assertions
     ],
 )
