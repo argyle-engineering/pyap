@@ -301,6 +301,7 @@ street_type_list = [
     "Centers",
     "Centr",
     "Centre",
+    "Chase",
     "Cir",
     "Circ",
     "Circl",
