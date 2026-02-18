@@ -176,6 +176,8 @@ def test_street_name(input, expected):
         ("Parkway", True),
         ("STATE ROAD 123", True),
         ("W. STATE ROAD 123", True),
+        ("Alt 123", True),
+        ("Alternate 123", True),
         # negative assertions
     ],
 )
@@ -514,6 +516,9 @@ def test_po_box_positive(input, expected):
         ("123 SE 4 NE", True),
         ("123 Route 70", True),
         ("1234 WOODMONT DRIVE NORTHWEST", True),
+        ("123 WHITNEY CHASE", True),
+        ("123 Chase street", True),
+        ("123 Chase Wimbledom St.", True),
         # negative assertions
         ("6 95 34 75 COMPANY PHONE IS", False),
         (", 666 Hell ST PMB 29700", False),
