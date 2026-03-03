@@ -723,6 +723,7 @@ street_type_list = [
     "Traces",
     "Track",
     "Tracks",
+    "Tract",
     "Trafficway",
     "Trail",
     "Trailer",
