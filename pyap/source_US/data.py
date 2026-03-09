@@ -879,37 +879,46 @@ floor = r"""
     floor_indic=floor_indic
 )
 
+tower = r"(?:{re_post_direction}\ [Tt][Oo][Ww][Ee][Rr])".format(
+    re_post_direction=post_direction_re
+)
+
 building = r"""
             (?P<building_id>
                 (?:
-                    (?:[Bb][Uu][Ii][Ll][Dd][Ii][Nn][Gg])\.?
-                    |
-                    (?:[Bb][Ll][Dd][Gg])\.?
-                    |
-                    (?:[Bb][Ll][Vv])\.?
-                )
-                \ 
-                (?:
                     (?:
-                        [Aa][Nn][Dd]\ 
+                        (?:[Bb][Uu][Ii][Ll][Dd][Ii][Nn][Gg])\.?
                         |
-                        {thousand}
+                        (?:[Bb][Ll][Dd][Gg])\.?
                         |
-                        {hundred}
+                        (?:[Bb][Ll][Vv])\.?
+                    )
+                    \ 
+                    (?:
+                        (?:
+                            [Aa][Nn][Dd]\ 
+                            |
+                            {thousand}
+                            |
+                            {hundred}
+                            |
+                            {zero_to_nine}
+                            |
+                            {ten_to_ninety}
+                        ){{1,5}}
                         |
-                        {zero_to_nine}
-                        |
-                        {ten_to_ninety}
-                    ){{1,5}}
+                        \d{{0,4}}(?:\.\d)?[A-Za-z]?[XxVvIi]{{0,4}}
+                    )
                     |
-                    \d{{0,4}}(?:\.\d)?[A-Za-z]?[XxVvIi]{{0,4}}
-                )
+                    {tower}
+                 )
             )
             """.format(
     thousand=thousand,
     hundred=hundred,
     zero_to_nine=zero_to_nine,
     ten_to_ninety=ten_to_ninety,
+    tower=tower,
 )
 
 occupancy_details = (

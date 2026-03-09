@@ -304,6 +304,7 @@ def test_floor(input, expected):
         ("Building ", True),
         ("building one ", True),
         ("Building three ", True),
+        ("South Tower", True),
         # negative assertions
         ("bldg", False),
         ("bldgm", False),
@@ -521,6 +522,7 @@ def test_po_box_positive(input, expected):
         ("123 Chase Wimbledom St.", True),
         ("82 ALBRO TRACT", True),
         ("6123 SHEFFIELD HOUSE", True),
+        ("99 Valley Greens Dr\nSouth Tower", True),
         # negative assertions
         ("6 95 34 75 COMPANY PHONE IS", False),
         (", 666 Hell ST PMB 29700", False),
