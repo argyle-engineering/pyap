@@ -481,6 +481,7 @@ street_type_list = [
     "Hollows",
     "Holw",
     "Holws",
+    "House",
     "Hrbor",
     "Ht",
     "Hts",

@@ -520,6 +520,7 @@ def test_po_box_positive(input, expected):
         ("123 Chase street", True),
         ("123 Chase Wimbledom St.", True),
         ("82 ALBRO TRACT", True),
+        ("6123 SHEFFIELD HOUSE", True),
         # negative assertions
         ("6 95 34 75 COMPANY PHONE IS", False),
         (", 666 Hell ST PMB 29700", False),
