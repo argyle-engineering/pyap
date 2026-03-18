@@ -245,7 +245,7 @@ def test_post_direction(input, expected):
 )
 def test_street_type(input, expected):
     """tests string match for a street id"""
-    execute_matching_test(input, expected, data_us.street_type_extended)
+    execute_matching_test(input, expected, data_us.street_type_extended("a"))
 
 
 @pytest.mark.parametrize(
@@ -662,6 +662,7 @@ def test_full_street_positive(input, expected):
         ("1234 Fowlstown Rd Lot#18 \nBainbridge, GA  39817", True),
         ("1234 LONG LANE\nB2 \nUPPER DARBY PA 19082", True),
         # negative assertions
+        ("123 Nw Awesome Drive\n12345", False),
         ("ONE HEALING CENTER LLC, 16444", False),
         ("85 STEEL REGULAR SHAFT - NE", False),
         ("3 STRUCTURE WITH PE", False),

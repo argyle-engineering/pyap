@@ -827,17 +827,20 @@ street_types_with_interstate_re = rf"{street_types_re}|{interstate_street_type}"
 
 street_types_leading_re = street_type_list_to_regex(street_type_leading_list)
 
-street_type_extended = r"""
+
+def street_type_extended(idx: str) -> str:
+    return r"""
             (?:
-                {street_type_a}
-                (?P<route_id>
+                {street_type}
+                (?P<route_id_{idx}>
                     {space_div}\(?[Rr][Oo][Uu][Tt][Ee]\ [A-Za-z0-9]+(?:\ ?\))?
                 )?
             )
-""".format(
-    street_type_a=rf"(?P<street_type_a>{street_types_with_interstate_re})",
-    space_div=space_div,
-)
+    """.format(
+        street_type=rf"(?P<street_type_{idx}>{street_types_with_interstate_re})",
+        idx=idx,
+        space_div=space_div,
+    )
 
 
 typed_street_name = r"""
@@ -852,7 +855,7 @@ typed_street_name = r"""
 """.format(
     space_div=space_div,
     street_name_a=rf"(?P<street_name_a>{street_name_multi_word_re})",
-    street_type_a=street_type_extended,
+    street_type_a=street_type_extended("a"),
     street_type_b=rf"(?P<street_type_b>{street_types_leading_re})",
     street_name_b=rf"(?P<street_name_b>{street_name_one_word_re})",
     post_direction_re=post_direction_re,
@@ -1052,7 +1055,7 @@ full_street = r"""
                             |
                             (?:
                                 {post_direction_re}\ 
-                                \d{{,3}}[A-Za-z\-]{{1,31}}
+                                \d{{,3}}[A-Za-z\-]{{1,31}}(?!\s+{street_type})
                             )
                         )
                         (?:{space_div}{post_direction})?
@@ -1080,6 +1083,7 @@ full_street = r"""
     street_number=street_number,
     typed_street_name=typed_street_name,
     numbered_or_typeless_street_name=numbered_or_typeless_street_name,
+    street_type=street_type_extended("c"),
     post_direction=post_direction,
     post_direction_re=post_direction_re,
     floor=floor,
