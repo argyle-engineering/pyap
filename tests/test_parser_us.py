@@ -280,6 +280,7 @@ def test_typed_street_name(input, expected):
         ("16th FL.", True),
         ("1st fl Horiz", True),
         ("56th floor Horizontal", True),
+        ("Fl1", True),
         # negative assertions
         ("16th.floor", False),
         ("1stfloor", False),
@@ -661,6 +662,7 @@ def test_full_street_positive(input, expected):
         ("206 La Rue France, Lafayette, LA, 70508", True),
         ("1234 Fowlstown Rd Lot#18 \nBainbridge, GA  39817", True),
         ("1234 LONG LANE\nB2 \nUPPER DARBY PA 19082", True),
+        ("567-55 Arlington Terrace Fl1 \nJamaica, NY 11435", True),
         # negative assertions
         ("123 Nw Awesome Drive\n12345", False),
         ("ONE HEALING CENTER LLC, 16444", False),
