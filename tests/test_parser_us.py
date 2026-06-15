@@ -524,6 +524,7 @@ def test_po_box_positive(input, expected):
         ("82 ALBRO TRACT", True),
         ("6123 SHEFFIELD HOUSE", True),
         ("99 Valley Greens Dr\nSouth Tower", True),
+        ("612 NC 54 Apt B77", True),
         # negative assertions
         ("6 95 34 75 COMPANY PHONE IS", False),
         (", 666 Hell ST PMB 29700", False),
@@ -663,6 +664,7 @@ def test_full_street_positive(input, expected):
         ("1234 Fowlstown Rd Lot#18 \nBainbridge, GA  39817", True),
         ("1234 LONG LANE\nB2 \nUPPER DARBY PA 19082", True),
         ("567-55 Arlington Terrace Fl1 \nJamaica, NY 11435", True),
+        ("612 NC 54 Apt B77 \nCarrboro, NC 27510-6105", True),
         # negative assertions
         ("123 Nw Awesome Drive\n12345", False),
         ("ONE HEALING CENTER LLC, 16444", False),
