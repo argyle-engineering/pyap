@@ -110,6 +110,76 @@ street_number = r"""(?P<street_number>
     from_to="{1,5}",
 )
 
+
+def states_abbrvs_regex() -> str:
+    # Some abbreviations are non-standard
+    _STATE_ABBRS = {
+        "AL",
+        "AK",
+        "AZ",
+        "AR",
+        "CA",
+        "CO",
+        "CT",
+        "DE",
+        "FL",
+        "GA",
+        "HI",
+        "ID",
+        "IL",
+        "IN",
+        "IA",
+        "KS",
+        "KY",
+        "LA",
+        "ME",
+        "MD",
+        "MA",
+        "MI(?:CH)?\.?",
+        "MN",
+        "MS",
+        "MO",
+        "MT",
+        "NE",
+        "NV",
+        "NH",
+        "NJ",
+        "NM",
+        "NY|N\.Y\.",
+        "NC",
+        "ND",
+        "OH",
+        "OK",
+        "OR",
+        "PA",
+        "RI",
+        "SC",
+        "SD",
+        "TN",
+        "TX",
+        "UT",
+        "VT",
+        "VA",
+        "WA",
+        "WV",
+        "WI",
+        "WY",
+    }
+    _NON_STATE_ABBRS = {
+        "AS",
+        "GU",
+        "MP",
+        "PR",
+        "VI",
+        "D\.?C\.?",
+    }
+    return (
+        r"(?:"
+        + str_list_to_upper_lower_regex(list(_STATE_ABBRS | _NON_STATE_ABBRS))
+        + r")(?![A-Za-z])"
+    )
+
+
 """
 Regexp for matching street name.
 In example below:
@@ -192,6 +262,12 @@ numbered_alternate = (
     r"""(?:[Aa][Ll][Tt]|[Aa][Ll][Tt][Ee][Rr][Nn][Aa][Tt][Ee])\ \d{1,4}(?!\d)"""
 )
 
+# Some states name their state-maintained highways by the state abbreviation
+# and the number.
+numbered_state_highway = r"""(?:{states}\ \d{{1,4}}(?!\d))""".format(
+    states=states_abbrvs_regex()
+)
+
 # Used to handle edge cases where streets don't have a street type:
 # eg. `55 HIGHPOINT`, `600 HIGHWAY 32`
 numbered_or_typeless_street_name = r"""
@@ -211,6 +287,8 @@ numbered_or_typeless_street_name = r"""
             {numbered_route_re}
             |
             {numbered_alternate}
+            |
+            {numbered_state_highway}
         )
     )
 """.format(
@@ -223,6 +301,7 @@ numbered_or_typeless_street_name = r"""
     numbered_road_re=numbered_road_re,
     numbered_route_re=numbered_route_re,
     numbered_alternate=numbered_alternate,
+    numbered_state_highway=numbered_state_highway,
 )
 
 post_direction = r"""
@@ -1092,75 +1171,6 @@ full_street = r"""
     mail_stop=mail_stop,
     po_box=po_box,
 )
-
-
-def states_abbrvs_regex() -> str:
-    # Some abbreviations are non-standard
-    _STATE_ABBRS = {
-        "AL",
-        "AK",
-        "AZ",
-        "AR",
-        "CA",
-        "CO",
-        "CT",
-        "DE",
-        "FL",
-        "GA",
-        "HI",
-        "ID",
-        "IL",
-        "IN",
-        "IA",
-        "KS",
-        "KY",
-        "LA",
-        "ME",
-        "MD",
-        "MA",
-        "MI(?:CH)?\.?",
-        "MN",
-        "MS",
-        "MO",
-        "MT",
-        "NE",
-        "NV",
-        "NH",
-        "NJ",
-        "NM",
-        "NY|N\.Y\.",
-        "NC",
-        "ND",
-        "OH",
-        "OK",
-        "OR",
-        "PA",
-        "RI",
-        "SC",
-        "SD",
-        "TN",
-        "TX",
-        "UT",
-        "VT",
-        "VA",
-        "WA",
-        "WV",
-        "WI",
-        "WY",
-    }
-    _NON_STATE_ABBRS = {
-        "AS",
-        "GU",
-        "MP",
-        "PR",
-        "VI",
-        "D\.?C\.?",
-    }
-    return (
-        r"(?:"
-        + str_list_to_upper_lower_regex(list(_STATE_ABBRS | _NON_STATE_ABBRS))
-        + r")(?![A-Za-z])"
-    )
 
 
 # region1 is actually a "state"
