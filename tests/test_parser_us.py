@@ -183,7 +183,9 @@ def test_street_name(input, expected):
 )
 def test_numbered_or_typeless_street_name(input, expected):
     """tests positive string match for a street name"""
-    execute_matching_test(input, expected, data_us.numbered_or_typeless_street_name)
+    execute_matching_test(
+        input, expected, data_us.numbered_or_typeless_street_name("a")
+    )
 
 
 @pytest.mark.parametrize(
@@ -525,6 +527,7 @@ def test_po_box_positive(input, expected):
         ("6123 SHEFFIELD HOUSE", True),
         ("99 Valley Greens Dr\nSouth Tower", True),
         ("612 NC 54 Apt B77", True),
+        ("US ROUTE #25", True),
         # negative assertions
         ("6 95 34 75 COMPANY PHONE IS", False),
         (", 666 Hell ST PMB 29700", False),
@@ -665,6 +668,7 @@ def test_full_street_positive(input, expected):
         ("1234 LONG LANE\nB2 \nUPPER DARBY PA 19082", True),
         ("567-55 Arlington Terrace Fl1 \nJamaica, NY 11435", True),
         ("612 NC 54 Apt B77 \nCarrboro, NC 27510-6105", True),
+        ("US ROUTE #25\nMEGAVILLE NJ 08876", True),
         # negative assertions
         ("123 Nw Awesome Drive\n12345", False),
         ("ONE HEALING CENTER LLC, 16444", False),

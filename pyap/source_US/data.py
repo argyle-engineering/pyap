@@ -256,7 +256,7 @@ single_street_name_list = [
 
 numbered_road_re = r"""[Ss][Tt][Aa][Tt][Ee]\ [Rr][Oo][Aa][Dd]\ \d{1,4}(?!\d)"""
 
-numbered_route_re = r"""[Rr][Oo][Uu][Tt][Ee]\ \d{1,4}(?!\d)"""
+numbered_route_re = r"""(?:[Uu][Ss]\ )?[Rr][Oo][Uu][Tt][Ee]\ \#?\d{1,4}(?!\d)"""
 
 numbered_alternate = (
     r"""(?:[Aa][Ll][Tt]|[Aa][Ll][Tt][Ee][Rr][Nn][Aa][Tt][Ee])\ \d{1,4}(?!\d)"""
@@ -268,41 +268,45 @@ numbered_state_highway = r"""(?:{states}\ \d{{1,4}}(?!\d))""".format(
     states=states_abbrvs_regex()
 )
 
+
 # Used to handle edge cases where streets don't have a street type:
 # eg. `55 HIGHPOINT`, `600 HIGHWAY 32`
-numbered_or_typeless_street_name = r"""
-    (?P<typeless_street_name>
-        (?:{post_direction_re}{space_div})?
-        (?:
-            {single_street_name_regex}
-            |
-            [Aa][Tt]\ {interstate_street_type}
-            |
-            {highway_re}
-            |
-            {numbered_avenue_re}
-            |
-            {numbered_road_re}
-            |
-            {numbered_route_re}
-            |
-            {numbered_alternate}
-            |
-            {numbered_state_highway}
+def numbered_or_typeless_street_name(idx: str) -> str:
+    return r"""
+        (?P<typeless_street_name_{idx}>
+            (?:{post_direction_re}{space_div})?
+            (?:
+                {single_street_name_regex}
+                |
+                [Aa][Tt]\ {interstate_street_type}
+                |
+                {highway_re}
+                |
+                {numbered_avenue_re}
+                |
+                {numbered_road_re}
+                |
+                {numbered_route_re}
+                |
+                {numbered_alternate}
+                |
+                {numbered_state_highway}
+            )
         )
+    """.format(
+        idx=idx,
+        post_direction_re=post_direction_re,
+        space_div=space_div,
+        single_street_name_regex=str_list_to_upper_lower_regex(single_street_name_list),
+        interstate_street_type=interstate_street_type,
+        highway_re=highway_re,
+        numbered_avenue_re=numbered_avenue_re,
+        numbered_road_re=numbered_road_re,
+        numbered_route_re=numbered_route_re,
+        numbered_alternate=numbered_alternate,
+        numbered_state_highway=numbered_state_highway,
     )
-""".format(
-    post_direction_re=post_direction_re,
-    space_div=space_div,
-    single_street_name_regex=str_list_to_upper_lower_regex(single_street_name_list),
-    interstate_street_type=interstate_street_type,
-    highway_re=highway_re,
-    numbered_avenue_re=numbered_avenue_re,
-    numbered_road_re=numbered_road_re,
-    numbered_route_re=numbered_route_re,
-    numbered_alternate=numbered_alternate,
-    numbered_state_highway=numbered_state_highway,
-)
+
 
 post_direction = r"""
                     (?P<post_direction>
@@ -1128,7 +1132,7 @@ full_street = r"""
                     (?:
                         {street_number}{space_div}?
                         (?:
-                            (?:{numbered_or_typeless_street_name})
+                            (?:{numbered_or_typeless_street_name_a})
                             |
                             (?:{typed_street_name}(?![A-Za-z\d\.]))
                             |
@@ -1144,6 +1148,8 @@ full_street = r"""
                         \d{{1,4}}{space_div}{post_direction_re}{space_div}
                         \d{{1,4}}{space_div}{post_direction_re}
                     )
+                    |
+                    (?:{numbered_or_typeless_street_name_b})
                 )
                 (?P<line2>
                     (?:{part_div}{floor})?
@@ -1161,7 +1167,8 @@ full_street = r"""
     part_div=part_div,
     street_number=street_number,
     typed_street_name=typed_street_name,
-    numbered_or_typeless_street_name=numbered_or_typeless_street_name,
+    numbered_or_typeless_street_name_a=numbered_or_typeless_street_name("a"),
+    numbered_or_typeless_street_name_b=numbered_or_typeless_street_name("b"),
     street_type=street_type_extended("c"),
     post_direction=post_direction,
     post_direction_re=post_direction_re,
