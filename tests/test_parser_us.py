@@ -178,7 +178,9 @@ def test_street_name(input, expected):
         ("W. STATE ROAD 123", True),
         ("Alt 123", True),
         ("Alternate 123", True),
+        ("NC 54", True),
         # negative assertions
+        ("nC 54", False),
     ],
 )
 def test_numbered_or_typeless_street_name(input, expected):

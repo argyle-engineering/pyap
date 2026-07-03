@@ -34,6 +34,17 @@ def test_api_parse_single_street():
     assert str(addresses[0].full_address) == "255 SOUTH STREET"
 
 
+def test_api_parse_single_street_skips_mixed_case_state_highway_false_positive():
+    test_address = (
+        "Hilmar Cheese Company, Inc.\n"
+        "Plies: aR 8901 North Lander Avenue\n"
+        "ANY\n"
+        "2-CHEESE COMPANY No Hilmar, California 95324"
+    )
+    addresses = parse_single_street(test_address, country="US")
+    assert str(addresses[0].full_street) == "8901 North Lander Avenue"
+
+
 def test_address_class_init():
     addr = address.Address(
         country_id="US",

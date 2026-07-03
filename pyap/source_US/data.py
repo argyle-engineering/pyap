@@ -110,74 +110,80 @@ street_number = r"""(?P<street_number>
     from_to="{1,5}",
 )
 
+STATE_ABBRS = (
+    "AL",
+    "AK",
+    "AZ",
+    "AR",
+    "CA",
+    "CO",
+    "CT",
+    "DE",
+    "FL",
+    "GA",
+    "HI",
+    "ID",
+    "IL",
+    "IN",
+    "IA",
+    "KS",
+    "KY",
+    "LA",
+    "ME",
+    "MD",
+    "MA",
+    r"MI(?:CH)?\.?",
+    "MN",
+    "MS",
+    "MO",
+    "MT",
+    "NE",
+    "NV",
+    "NH",
+    "NJ",
+    "NM",
+    r"NY|N\.Y\.",
+    "NC",
+    "ND",
+    "OH",
+    "OK",
+    "OR",
+    "PA",
+    "RI",
+    "SC",
+    "SD",
+    "TN",
+    "TX",
+    "UT",
+    "VT",
+    "VA",
+    "WA",
+    "WV",
+    "WI",
+    "WY",
+)
+
+# Some abbreviations are non-standard.
+NON_STATE_ABBRS = (
+    "AS",
+    "GU",
+    "MP",
+    "PR",
+    "VI",
+    r"D\.?C\.?",
+)
+
 
 def states_abbrvs_regex() -> str:
-    # Some abbreviations are non-standard
-    _STATE_ABBRS = {
-        "AL",
-        "AK",
-        "AZ",
-        "AR",
-        "CA",
-        "CO",
-        "CT",
-        "DE",
-        "FL",
-        "GA",
-        "HI",
-        "ID",
-        "IL",
-        "IN",
-        "IA",
-        "KS",
-        "KY",
-        "LA",
-        "ME",
-        "MD",
-        "MA",
-        "MI(?:CH)?\.?",
-        "MN",
-        "MS",
-        "MO",
-        "MT",
-        "NE",
-        "NV",
-        "NH",
-        "NJ",
-        "NM",
-        "NY|N\.Y\.",
-        "NC",
-        "ND",
-        "OH",
-        "OK",
-        "OR",
-        "PA",
-        "RI",
-        "SC",
-        "SD",
-        "TN",
-        "TX",
-        "UT",
-        "VT",
-        "VA",
-        "WA",
-        "WV",
-        "WI",
-        "WY",
-    }
-    _NON_STATE_ABBRS = {
-        "AS",
-        "GU",
-        "MP",
-        "PR",
-        "VI",
-        "D\.?C\.?",
-    }
     return (
         r"(?:"
-        + str_list_to_upper_lower_regex(list(_STATE_ABBRS | _NON_STATE_ABBRS))
+        + str_list_to_upper_lower_regex(list(STATE_ABBRS + NON_STATE_ABBRS))
         + r")(?![A-Za-z])"
     )
+
+
+def state_highway_abbrvs_regex() -> str:
+    return r"(?:" + "|".join(STATE_ABBRS + NON_STATE_ABBRS) + r")(?![A-Za-z])"
 
 
 """
@@ -265,7 +271,7 @@ numbered_alternate = (
 # Some states name their state-maintained highways by the state abbreviation
 # and the number.
 numbered_state_highway = r"""(?:{states}\ \d{{1,4}}(?!\d))""".format(
-    states=states_abbrvs_regex()
+    states=state_highway_abbrvs_regex()
 )
 
 
