@@ -436,6 +436,7 @@ def test_po_box_positive(input, expected):
     "input,expected",
     [
         # positive assertions
+        ("700 STATE HWY 121, STE 200", True),
         ("10354 Smoothwater Dr Site 142", True),
         ("2101 W. STATE ROAD 434\nSUITE 315", True),
         ("14001 E. ILIFF AVE 5-7TH FLOOR", True),

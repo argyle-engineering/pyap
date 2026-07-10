@@ -270,7 +270,11 @@ numbered_alternate = (
 
 # Some states name their state-maintained highways by the state abbreviation
 # and the number.
-numbered_state_highway = r"""(?:{states}\ \d{{1,4}}(?!\d))""".format(
+numbered_state_highway = r"""
+    (?:{states}\ \d{{1,4}}(?!\d))
+    |
+    (?:[Ss][Tt][Aa][Tt][Ee]\s[Hh][Ww][Yy]\s\d{{1,4}}(?!\d))
+""".format(
     states=state_highway_abbrvs_regex()
 )
 
