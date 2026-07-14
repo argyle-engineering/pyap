@@ -314,6 +314,44 @@ def test_occupancy_negative(input, expected):
 
 
 @pytest.mark.parametrize(
+    "input,occupancy,street_number",
+    [
+        ("200 - 5050 ", "200", "5050"),
+        ("108 - 1550 ", "108", "1550"),
+        ("202-121 ", "202", "121"),
+        ("104-18663 ", "104", "18663"),
+        ("#4-123 ", "4", "123"),
+    ],
+)
+def test_unit_first_civic_positive(input, occupancy, street_number):
+    """tests string match for the occupancy-first civic number format"""
+    match = utils.match(
+        data_ca.unit_first_civic, utils.unicode_str(input), re.VERBOSE
+    )
+    assert match is not None
+    assert match.group("occupancy_c") == occupancy
+    assert match.group("street_number_c") == street_number
+
+
+@pytest.mark.parametrize(
+    "input,expected",
+    [
+        # negative assertions
+        ("718 - 8th ", False),
+        ("108-1550x ", False),
+        ("suite 900 ", False),
+    ],
+)
+def test_unit_first_civic_negative(input, expected):
+    """tests string match for the occupancy-first civic number format"""
+    match = utils.match(
+        data_ca.unit_first_civic, utils.unicode_str(input), re.VERBOSE
+    )
+    is_found = match is not None
+    assert is_found == expected
+
+
+@pytest.mark.parametrize(
     "input,expected",
     [
         # positive assertions
