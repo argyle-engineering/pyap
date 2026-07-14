@@ -232,7 +232,7 @@ street_type = r"""
                 [Kk][Ee][Yy]{div}|
                 [Kk][Nn][Oo][Ll][Ll]{div}|
                 [Ll][Aa][Nn][Dd][Ii][Nn][Gg]{div}|[Ll][Aa][Nn][Dd][Nn][Gg]{div}|
-                [Ll][Aa][Nn][Ee]{div}|
+                [Ll][Aa][Nn][Ee]{div}|[Ll][Nn]{div}|
                 [Ll][Ii][Mm][Ii][Tt][Ss]{div}|[Ll][Mm][Tt][Ss]{div}|
                 [Ll][Ii][Nn][Ee]{div}|
                 [Ll][Ii][Nn][Kk]{div}|

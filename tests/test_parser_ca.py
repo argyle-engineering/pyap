@@ -199,6 +199,7 @@ def test_post_direction(input, expected):
         ("Sq.", True),
         ("Street route 5 ", True),
         ("blvd", True),
+        ("Ln ", True),
         # negative assertions
         # TODO
     ],
@@ -423,6 +424,7 @@ still finding correct matches in full_address
             True,
         ),
         ("3264 Mainway Burlington L7M 1A7 Ontario, Canada", True),
+        ("8182 Meadow Ln, Whistler, BC V8E 0G3, Canada", True),
     ],
 )
 def test_full_address_positive(input, expected):
