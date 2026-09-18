@@ -98,7 +98,18 @@ street_number = r"""(?P<street_number>
                             {zero_to_nine}
                             |
                             {ten_to_ninety}
-                        ){from_to}
+                        ){from_to_and}
+                        # "and" only ever joins a spelled out number
+                        # i.e. "One hundred and five" - it is never one itself
+                        (?:
+                            {thousand}
+                            |
+                            {hundred}
+                            |
+                            {zero_to_nine}
+                            |
+                            {ten_to_ninety}
+                        )
                         |
                         (?:\b\d{from_to}(?:\-?(?:\d{from_to}|[A-Z]))?\ )
                     )
@@ -108,6 +119,7 @@ street_number = r"""(?P<street_number>
     zero_to_nine=zero_to_nine,
     ten_to_ninety=ten_to_ninety,
     from_to="{1,5}",
+    from_to_and="{0,4}",
 )
 
 STATE_ABBRS = (
@@ -936,9 +948,103 @@ def street_type_extended(idx: str) -> str:
     )
 
 
+# Street types that effectively always end a street - if a street name ends
+# with one of these, the word after it belongs to the next address part (the
+# city), not to the street.
+# Words such as "Park", "Bay", "Green", "Mount" are both street types and
+# common parts of a street name i.e. "Oak Park Blvd",
+# so they are deliberately left out.
+terminating_street_type_list = [
+    "Ave",
+    "Aven",
+    "Avenue",
+    "Avn",
+    "Bl",
+    "Blvd",
+    "Boul",
+    "Boulevard",
+    "Cir",
+    "Circle",
+    "Dr",
+    "Drive",
+    "Expressway",
+    "Expy",
+    "Freeway",
+    "Fwy",
+    "Highway",
+    "Hwy",
+    "Ln",
+    "Lane",
+    "Parkway",
+    "Pkwy",
+    "Pky",
+    "Rd",
+    "Road",
+    "St",
+    "Street",
+    "Terrace",
+    "Tpke",
+    "Trail",
+    "Trl",
+    "Turnpike",
+]
+
+
+# Street types that do show up after another street type, as part of the
+# street name itself, for example "3rd Street Promenade", "Court Sq".
+compound_street_type_list = [
+    "Arcade",
+    "Court",
+    "Ct",
+    "Ext",
+    "Extension",
+    "Mall",
+    "Plaza",
+    "Plz",
+    "Promenade",
+    "Row",
+    "Sq",
+    "Square",
+    "Walk",
+]
+
+
+def not_ending_with_terminating_street_type() -> str:
+    """A negative lookbehind asserting the preceding text doesn't end with a
+    street type that terminates a street."""
+    by_length: dict[int, list[str]] = {}
+    for street_type in terminating_street_type_list:
+        by_length.setdefault(len(street_type), []).append(street_type)
+    return "".join(
+        # a lookbehind has to be fixed-width so the trailing dot of an
+        # abbreviation ("Blvd.") needs a lookbehind of its own
+        r"(?<!\b(?:{types}))(?<!\b(?:{types})\.)".format(
+            types=str_list_to_upper_lower_regex(types)
+        )
+        for _, types in sorted(by_length.items())
+    )
+
+
 typed_street_name = r"""
             (?:      
-                (?:{street_name_a}{space_div}{street_type_a})
+                (?:
+                    {street_name_a}
+                    (?:
+                        # i.e. "3rd Street Promenade" - the street name goes on
+                        \ {{1,2}}(?={compound_street_types}\b)
+                        |
+                        # i.e. "800 Mulholland St Bay City MI" is a street followed
+                        # by a city, not a street named "Mulholland St" whose
+                        # type is "Bay"
+                        {no_terminating_street_type}\ {{1,2}}
+                    )
+                    {street_type_a}
+                )
+                |
+                # A comma between the street name and the street type
+                # is unusual, but happens ("140 EAST 45TH, ST"). We only allow
+                # it when the street type isn't followed by another word.
+                (?:{street_name_d}\,\ ?{street_type_d}(?!\ [A-Za-z]))
                 |
                 (?:
                     (?:{post_direction_re}{space_div})?
@@ -949,6 +1055,10 @@ typed_street_name = r"""
     space_div=space_div,
     street_name_a=rf"(?P<street_name_a>{street_name_multi_word_re})",
     street_type_a=street_type_extended("a"),
+    no_terminating_street_type=not_ending_with_terminating_street_type(),
+    compound_street_types=str_list_to_upper_lower_regex(compound_street_type_list),
+    street_name_d=rf"(?P<street_name_d>{street_name_multi_word_re})",
+    street_type_d=street_type_extended("d"),
     street_type_b=rf"(?P<street_type_b>{street_types_leading_re})",
     street_name_b=rf"(?P<street_name_b>{street_name_one_word_re})",
     post_direction_re=post_direction_re,
@@ -1017,10 +1127,12 @@ building = r"""
     tower=tower,
 )
 
+# A unit id is short and always contains a digit.
+# A plain word like the "Shore" in "Bay Shore" is a city, not
+# a unit id - we don't let one start with three letters.
 occupancy_details = (
-    r"(?:(?:\#\ )?[A-Za-z\#\&\-\d]{{1,7}}(?:\s?{post_direction_re})?)".format(
-        post_direction_re=post_direction_re
-    )
+    r"(?:(?:\#\ )?(?![A-Za-z]{{3}})[A-Za-z\#\&\-\d]{{1,7}}"
+    r"(?:\s?{post_direction_re})?)".format(post_direction_re=post_direction_re)
 )
 occupancy = r"""
             (?P<occupancy>
@@ -1054,7 +1166,14 @@ occupancy = r"""
                             # Lot
                             [Ll][Oo][Tt]
                         )\b[\ \,\.]*
-                        {occupancy_details}? 
+                        (?:
+                            {occupancy_details}
+                            |
+                            # a bare occupancy word (no unit id) must not eat
+                            # the beginning of a city name, for example the "Bay" in
+                            # "Bay City, TX"
+                            (?![\ \,\.]*[A-Za-z])
+                        )
                         |
                         \d{{2,4}}\ [Ss][Tt][Ee](?:\ \*)?
                     )
