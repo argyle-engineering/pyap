@@ -212,6 +212,18 @@ def test_combine_results():
             },
         ),
         (
+            "742 Via Fontana Riverside CA 92501",
+            {
+                "street_number": "742",
+                "street_type": "Via",
+                "street_name": "Fontana",
+                "city": "Riverside",
+                "region1": "CA",
+                "postal_code": "92501",
+                "line1": "742 Via Fontana",
+            },
+        ),
+        (
             "2006 Broadway Ave Suite 2A, PO Drawer J, Great Bend, KS 67530",
             {
                 "street_number": "2006",

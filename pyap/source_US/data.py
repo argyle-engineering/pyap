@@ -907,6 +907,7 @@ street_type_list = [
 street_type_leading_list = [
     "Camino",
     "El\ Camino",
+    "Via",
     "Avenue",
     "Blvd",
     "Ave",
