@@ -377,6 +377,17 @@ occupancy = r"""
             )\ ?
             """
 
+unit_first_civic = r"""
+            (?:
+                (?<![\.0-9])
+                \#?
+                (?P<occupancy_c>\d{1,4})
+                \ ?\-\ ?
+                (?P<street_number_c>\d{1,5})
+                (?=[\ ,\n])\ ?
+            )
+            """
+
 po_box = r"""
             (?:
                 # English - PO Box 123
@@ -444,7 +455,7 @@ full_street = r"""
         (?P<full_street>
 
             (?P<line1>
-                {street_number}\,?\ ?
+                (?:{unit_first_civic}|{street_number})\,?\ ?
                 {street_name}?\,?\ ?
                 (?:(?<=[\ \,]){street_type})\,?\ ?
                 {post_direction}?
@@ -476,6 +487,7 @@ full_street = r"""
     floor=floor,
     building=building,
     occupancy=occupancy,
+    unit_first_civic=unit_first_civic,
     po_box=po_box,
     po_box_b=po_box_b,
     po_box_positive_lookahead=po_box_positive_lookahead,
