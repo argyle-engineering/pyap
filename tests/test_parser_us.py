@@ -259,6 +259,7 @@ def test_street_type(input, expected):
         ("ED DR", True),
         ("El Camino Real", True),
         ("La Rue", True),
+        ("Via Fontana", True),
         # negative assertions
         ("Camino Del Toro Loco", False),
     ],
@@ -561,6 +562,7 @@ def test_full_street_positive(input, expected):
         ("696 BEAL PKWY NW\nFT WALTON BCH FL 32547", True),
         ("2633 Camino Ramon Ste. 400 San Ramon, CA 94583-2176", True),
         ("2951 El Camino Real Palo Alto, CA 94306", True),
+        ("742 Via Fontana\nRiverside CA 92501", True),
         ("800 W EL CAMINO REAL\n350 STE *\nMOUNTAIN VIEW, CA 94040", True),
         ("3821 ED DR, RALEIGH, NC 27612", True),
         ("213 WEST 35TH STREET SUITE, 400, NEW YORK, NY", True),
