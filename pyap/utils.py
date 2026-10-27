@@ -11,9 +11,29 @@
 """
 
 import re
+import string
 from typing import Any, List, Union
 
 DEFAULT_FLAGS = re.VERBOSE | re.UNICODE
+
+
+def str_list_to_upper_lower_regex(str_list: List[str]) -> str:
+    regex = "|".join(set(str_list)).lower()
+    for letter in string.ascii_lowercase:
+        regex = regex.replace(
+            letter, "[{upper}{lower}]".format(upper=letter.upper(), lower=letter)
+        )
+
+    return regex
+
+
+def street_type_list_to_regex(street_type_list: list[str]) -> str:
+    """Converts a list of street types into a regex."""
+    street_types = str_list_to_upper_lower_regex(street_type_list)
+
+    street_types = street_types.replace("|", r"\b|\b")
+    street_types = r"\b" + r"(?:" + street_types + r")" + r"\b\.?"
+    return street_types
 
 
 def match(

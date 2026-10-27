@@ -27,6 +27,14 @@ def test_api_parse_canada():
     )
 
 
+def test_api_parse_australia():
+    test_address = "xxx 2/45 Smith St, Newtown NSW 2042 xxx"
+    addresses = parse(test_address, country="AU")
+    assert (
+        str(addresses[0].full_address) == "2/45 Smith St, Newtown NSW 2042"
+    )
+
+
 def test_api_parse_single_street():
     test_address = "255 SOUTH STREET"
     addresses = parse_single_street(test_address, country="US")

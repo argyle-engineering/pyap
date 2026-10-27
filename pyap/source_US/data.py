@@ -14,19 +14,10 @@
     :license: MIT, see LICENSE for more details.
 """
 
-import string
 from typing import List
 from typing import Optional
 
-
-def str_list_to_upper_lower_regex(str_list: List[str]) -> str:
-    regex = "|".join(set(str_list)).lower()
-    for letter in string.ascii_lowercase:
-        regex = regex.replace(
-            letter, "[{upper}{lower}]".format(upper=letter.upper(), lower=letter)
-        )
-
-    return regex
+from pyap.utils import str_list_to_upper_lower_regex, street_type_list_to_regex
 
 
 space_div = r"(?:[\,\ ]{1,2}|$)"
@@ -914,17 +905,6 @@ street_type_leading_list = [
     "La\ Rue",
     "Rue",
 ]
-
-
-def street_type_list_to_regex(street_type_list: list[str]) -> str:
-    """Converts a list of street types into a regex"""
-    street_types = str_list_to_upper_lower_regex(street_type_list)
-
-    # Use \b to check that there are word boundaries before and after the street type
-    # Optionally match zero to two of " ", ",", or "." after the street name
-    street_types = street_types.replace("|", r"\b|\b")
-    street_types = r"\b" + r"(?:" + street_types + r")" + r"\b\.?"
-    return street_types
 
 
 street_types_re = street_type_list_to_regex(street_type_list)

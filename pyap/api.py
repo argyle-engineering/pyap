@@ -16,7 +16,7 @@ from . import parser
 from . import address
 
 
-def parse(some_text: str, country: Literal["US", "GB", "CA"]) -> List[address.Address]:
+def parse(some_text: str, country: Literal["US", "GB", "CA", "AU"]) -> List[address.Address]:
     """Creates request to AddressParser
     and returns list of Address objects
     """
@@ -25,7 +25,7 @@ def parse(some_text: str, country: Literal["US", "GB", "CA"]) -> List[address.Ad
 
 
 def parse_single_street(
-    some_text: str, country: Literal["US", "GB", "CA"]
+    some_text: str, country: Literal["US", "GB", "CA", "AU"]
 ) -> List[address.Address]:
     ap = parser.AddressParser(country)
     return ap.parse_single_street(some_text)

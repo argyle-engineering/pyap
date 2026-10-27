@@ -21,7 +21,7 @@ from . import utils
 
 
 class AddressParser:
-    def __init__(self, country: Literal["US", "CA", "GB"]):
+    def __init__(self, country: Literal["US", "CA", "GB", "AU"]):
         """Initialize with custom arguments"""
         self.country = country.upper()
 
