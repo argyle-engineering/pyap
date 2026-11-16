@@ -567,6 +567,7 @@ street_type_list = [
     "Hbr",
     "Hbrs",
     "Heights",
+    "Hgts",
     "Highway",
     "Highwy",
     "Hill",
