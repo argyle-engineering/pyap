@@ -29,17 +29,41 @@ detecting and parsing addresses. Currently it supports US 🇺🇸, Canadian �
 Installation
 ------------
 
-To install Pyap2, simply:
+Pyap2 requires Python 3.11 or newer. To install it:
 
 .. code-block:: bash
 
     $ pip install pyap2
 
 
+Development
+-----------
+
+Install the project and its development tools from the lock file:
+
+.. code-block:: bash
+
+    $ uv sync --locked --all-groups
+
+Run the same checks used by CI:
+
+.. code-block:: bash
+
+    $ uv run task check
+
+Individual tasks include ``lint``, ``check_fmt``, ``check_types``, ``fmt``, and
+``test``. For example:
+
+.. code-block:: bash
+
+    $ uv run task fmt
+    $ uv run task test
+
+
 
 About
 -----
-We started improving the original `pyap` by adopting poetry and adding typing support. 
+We started improving the original `pyap` by adopting modern packaging and adding typing support.
 It was extensively tested in web-scraping operations on thousands of US addresses. 
 Gradually, we added support for many rarer address formats and edge cases, as well 
 as the ability to parse a partial address where only street info is available. 

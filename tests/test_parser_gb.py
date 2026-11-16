@@ -1,7 +1,7 @@
 # pyright: reportPrivateUsage=false
 # -*- coding: utf-8 -*-
 
-""" Test for USA address parser """
+"""Test for USA address parser"""
 
 import re
 import pytest

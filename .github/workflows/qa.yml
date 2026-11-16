@@ -4,38 +4,46 @@ on:  # yamllint disable-line rule:truthy
   push:
 
 jobs:
-  build:
+  quality:
+    name: Quality checks
     runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+      with:
+        fetch-depth: 0
+    - name: Install uv and Python
+      uses: astral-sh/setup-uv@68559e99cc807c1eb7e9238fd43a15bba460eec2  # v10.3.3
+      with:
+        enable-cache: true
+        python-version: "3.12"
+    - name: Install dependencies
+      run: uv sync --locked --all-groups
+    - name: Lint
+      run: uv run --locked task lint
+    - name: Check formatting
+      run: uv run --locked task check_fmt
+    - name: Check types
+      run: uv run --locked task check_types
 
-    strategy:  # launches
+  test:
+    name: Test on Python ${{ matrix.python-version }}
+    runs-on: ubuntu-latest
+    strategy:
       fail-fast: false
       matrix:
-        task:  # yamllint disable rule:indentation
-        - lint
-        - yamllint
-        - check_types
-        - check_fmt
-        - test
-
+        python-version:
+        - "3.11"
+        - "3.12"
     steps:
-    - uses: actions/checkout@v4
-
-    - name: Set up Python 3.9.12
-      uses: actions/setup-python@v4
+    - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
       with:
-        python-version: 3.9.12
-
-    - name: Set up cache
-      uses: actions/cache@v4
-      id: cache
+        fetch-depth: 0
+    - name: Install uv and Python
+      uses: astral-sh/setup-uv@68559e99cc807c1eb7e9238fd43a15bba460eec2  # v10.3.3
       with:
-        path: /home/runner/.cache/pypoetry/virtualenvs
-        key: venv-${{ hashFiles('**/.github/workflows/qa.yml') }}-${{ hashFiles('**/poetry.lock')
-          }}
-
+        enable-cache: true
+        python-version: ${{ matrix.python-version }}
     - name: Install dependencies
-      run: |2
-        curl -sSL https://install.python-poetry.org | POETRY_VERSION=1.4.2 python3 -
-        poetry install
-    - name: QA
-      run: poetry run task ${{ matrix['task'] }}
+      run: uv sync --locked --all-groups
+    - name: Run tests
+      run: uv run --locked task test

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-""" Tests for CANADA address parser """
+"""Tests for CANADA address parser"""
 
 import re
 import pytest
@@ -418,8 +418,7 @@ still finding correct matches in full_address
             True,
         ),
         (
-            "3351, boul. des Forges C.P. 500, Trois-Rivières (Québec)"
-            " Canada, G9A 5H7",
+            "3351, boul. des Forges C.P. 500, Trois-Rivières (Québec) Canada, G9A 5H7",
             True,
         ),
         ("3264 Mainway Burlington L7M 1A7 Ontario, Canada", True),

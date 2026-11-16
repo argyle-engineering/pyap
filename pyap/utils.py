@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 
 """
-    pyap.utils
-    ~~~~~~~~~~~~~~~~
+pyap.utils
+~~~~~~~~~~~~~~~~
 
-    This module provides some utility functions.
+This module provides some utility functions.
 
-    :copyright: (c) 2015 by Vladimir Goncharov.
-    :license: MIT, see LICENSE for more details.
+:copyright: (c) 2015 by Vladimir Goncharov.
+:license: MIT, see LICENSE for more details.
 """
 
 import re

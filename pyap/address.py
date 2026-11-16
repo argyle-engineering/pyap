@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
 
 """
-    pyap.address
-    ~~~~~~~~~~~~~~~~
+pyap.address
+~~~~~~~~~~~~~~~~
 
-    Contains class for constructing Address object which holds information
-    about address and its components.
+Contains class for constructing Address object which holds information
+about address and its components.
 
-    :copyright: (c) 2015 by Vladimir Goncharov.
-    :license: MIT, see LICENSE for more details.
+:copyright: (c) 2015 by Vladimir Goncharov.
+:license: MIT, see LICENSE for more details.
 """
 
 from dataclasses import dataclass, asdict

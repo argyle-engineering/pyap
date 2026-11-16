@@ -1,49 +1,80 @@
-[tool.poetry]
+[build-system]
+requires = ["hatchling>=1.33.0", "hatch-vcs>=0.5.0"]
+build-backend = "hatchling.build"
+
+[project]
 name = "pyap2"
-version = "0.0.0"
-packages = [{ include = "pyap" }]
-description = "Pyap2 is a maintained fork of pyap, a regex-based library for parsing US, CA, and UK addresses. The fork adds typing support, handles more address formats and edge cases."
-authors = ["Argyle Developers <developers@argyle.io>"]
-documentation = "https://github.com/argyle-engineering/pyap"
-homepage = "https://github.com/argyle-engineering/pyap"
-repository = "https://github.com/argyle-engineering/pyap"
+dynamic = ["version"]
+description = "A maintained, typed fork of pyap for parsing US, CA, and UK addresses"
+readme = "README.rst"
+requires-python = ">=3.11"
 license = "MIT"
-readme="README.rst"
+license-files = ["LICENSE"]
+authors = [
+    { name = "Argyle Developers", email = "developers@argyle.io" },
+]
 keywords = ["address", "parser", "regex"]
 classifiers = [
-    "Programming Language :: Python :: 3.9",
-    "Programming Language :: Python :: 3.10",
-    "Programming Language :: Python :: 3.11",
-    "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
-    'Topic :: Software Development :: Libraries',
-    'Topic :: Scientific/Engineering :: Information Analysis',
-    'Topic :: Utilities'
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Information Analysis",
+    "Topic :: Software Development :: Libraries",
+    "Topic :: Utilities",
+    "Typing :: Typed",
+]
+dependencies = []
+
+[project.urls]
+Documentation = "https://github.com/argyle-engineering/pyap"
+Homepage = "https://github.com/argyle-engineering/pyap"
+Repository = "https://github.com/argyle-engineering/pyap"
+
+[dependency-groups]
+dev = [
+    "pyright>=1.1.414",
+    "pytest>=9.2.0",
+    "ruff>=0.17.5",
+    "taskipy>=1.14.1",
+    "yamllint>=1.38.0",
 ]
 
-[tool.poetry.dependencies]
-python = "^3.9"
+[tool.uv]
+required-version = ">=0.13.7"
 
-[tool.poetry.dev-dependencies]
-black = "*"
-flake8 = "*"
-flake8-bugbear = "*"
-yamllint = "*"
-pytest = "^7.1.2"
-taskipy = "^1.12.2"
+[tool.hatch.version]
+source = "vcs"
+
+[tool.hatch.version.raw-options]
+version_scheme = "no-guess-dev"
+local_scheme = "no-local-version"
+
+[tool.hatch.build.targets.wheel]
+packages = ["pyap"]
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "/AUTHORS.rst",
+    "/LICENSE",
+    "/README.rst",
+    "/pyap",
+    "/pyproject.toml",
+    "/tests",
+    "/uv.lock",
+]
 
 [tool.taskipy.tasks]
-lint = "flake8"
-yamllint = "yamllint ."
-run_pyright = "(npm list -g pyright@1.1.245 || npm install -g pyright@1.1.245) && pyright"
-check_types = "task run_pyright"
-check_fmt = "black --check ."
-fmt = "black ."
+lint = "ruff check . && yamllint ."
+check_types = "pyright"
+check_fmt = "ruff format --check ."
+fmt = "ruff format . && ruff check . --fix"
 test = "pytest tests -vvv"
-check = "task lint && task yamllint && task check_fmt && task check_types && task test"
+check = "task lint && task check_fmt && task check_types && task test"
 
 [tool.pyright]
-pythonVersion = "3.9"
+pythonVersion = "3.11"
 reportIncompatibleVariableOverride = true
 strictListInference = true
 strictDictionaryInference = true
@@ -63,13 +94,12 @@ reportUnnecessaryComparison = true
 reportAssertAlwaysTrue = true
 reportUnusedCoroutine = true
 
-[build-system]
-requires = ["poetry>=1.4", "poetry-dynamic-versioning>=1.0"]
-build-backend = "poetry.masonry.api"
+[tool.ruff]
+line-length = 88
+target-version = "py311"
 
-[tool.poetry-dynamic-versioning]
-enable = true
-vcs = "git"
-latest-tag = true
-pattern = "^(?P<base>\\d+\\.\\d+\\.\\d+)"
-format-jinja = "{% if distance == 0 %}{{ base }}{% else %}{{ base }}a{{ distance }}{% endif %}"
+[tool.ruff.lint]
+select = ["B", "E", "F"]
+
+[tool.ruff.lint.per-file-ignores]
+"pyap/source_*/*" = ["E501", "F522", "W291", "W293"]

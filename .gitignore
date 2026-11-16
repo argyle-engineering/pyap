@@ -15,6 +15,7 @@
 
 # Venvs
 /venv*
+/.venv
 
 # Misc
 run.py
