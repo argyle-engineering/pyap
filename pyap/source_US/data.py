@@ -1,17 +1,17 @@
 # -*- coding: utf-8 -*-
 
 """
-    pyap.source_US.data
-    ~~~~~~~~~~~~~~~~~~~~
+pyap.source_US.data
+~~~~~~~~~~~~~~~~~~~~
 
-    This module provides regular expression definitions required for
-    detecting US addresses.
+This module provides regular expression definitions required for
+detecting US addresses.
 
-    The module is expected to always contain 'full_address' variable containing
-    all address parsing definitions.
+The module is expected to always contain 'full_address' variable containing
+all address parsing definitions.
 
-    :copyright: (c) 2015 by Vladimir Goncharov.
-    :license: MIT, see LICENSE for more details.
+:copyright: (c) 2015 by Vladimir Goncharov.
+:license: MIT, see LICENSE for more details.
 """
 
 import string
@@ -259,9 +259,7 @@ post_direction_re = r"""
 
 numbered_avenue_re = r"""
                 (?:{post_direction_re}\ [Aa][Vv][Ee](?:\.|[Nn][Uu][Ee])?\ \d{{1,2}})
-""".format(
-    post_direction_re=post_direction_re
-)
+""".format(post_direction_re=post_direction_re)
 
 
 single_street_name_list = [
@@ -286,9 +284,7 @@ numbered_state_highway = r"""
     (?:{states}\ \d{{1,4}}(?!\d))
     |
     (?:[Ss][Tt][Aa][Tt][Ee]\s[Hh][Ww][Yy]\s\d{{1,4}}(?!\d))
-""".format(
-    states=state_highway_abbrvs_regex()
-)
+""".format(states=state_highway_abbrvs_regex())
 
 
 # Used to handle edge cases where streets don't have a street type:
@@ -334,9 +330,7 @@ post_direction = r"""
                     (?P<post_direction>
                         {post_direction_re}
                     )
-                """.format(
-    post_direction_re=post_direction_re
-)
+                """.format(post_direction_re=post_direction_re)
 
 # This list was taken from: https://pe.usps.com/text/pub28/28apc_002.htm
 # Bay, Broadway and Lp (abbreviation for Loop) were added to the list
@@ -358,7 +352,7 @@ street_type_list = [
     "Avenue",
     "Avn",
     "Avnue",
-    "Bay(?!\ [1-9])",
+    r"Bay(?!\ [1-9])",
     "Bayoo",
     "Bayou",
     "Bch",
@@ -906,12 +900,12 @@ street_type_list = [
 
 street_type_leading_list = [
     "Camino",
-    "El\ Camino",
+    r"El\ Camino",
     "Via",
     "Avenue",
     "Blvd",
     "Ave",
-    "La\ Rue",
+    r"La\ Rue",
     "Rue",
 ]
 
@@ -1082,9 +1076,7 @@ floor = r"""
                     {floor_indic}\ ?\#?\d+[A-Za-z]{{0,2}}
                 )
             )
-        """.format(
-    floor_indic=floor_indic
-)
+        """.format(floor_indic=floor_indic)
 
 tower = r"(?:{re_post_direction}\ [Tt][Oo][Ww][Ee][Rr])".format(
     re_post_direction=post_direction_re
@@ -1203,9 +1195,7 @@ occupancy = r"""
                     )
                 )
             )
-            """.format(
-    occupancy_details=occupancy_details
-)
+            """.format(occupancy_details=occupancy_details)
 
 mail_stop = r"""
             (?P<mail_stop>
@@ -1238,9 +1228,7 @@ po_box = r"""
                 |
                 (?:[Dd][Rr][Aa][Ww][Ee][Rr]\ +[A-Z]\b)
             )
-        """.format(
-    po_marker=po_marker
-)
+        """.format(po_marker=po_marker)
 
 phone_number = r"""
             (?:
@@ -1383,9 +1371,7 @@ def make_region1(idx: Optional[str] = None):
                 {state_abbrvs}
             )
         )
-        """.format(
-        state_abbrvs=states_abbrvs_regex(), maybe_idx=maybe_idx
-    )
+        """.format(state_abbrvs=states_abbrvs_regex(), maybe_idx=maybe_idx)
 
 
 # TODO: doesn't catch cities containing French characters
@@ -1427,7 +1413,7 @@ def make_region1_postal_code(
     def _indexed_region1(idx: Optional[str] = None):
         return rf"""(?:{part_div} {make_region1(idx)})"""
 
-    _postal_code = f"""(?:{part_div}|\-)? {postal_code}"""
+    _postal_code = rf"""(?:{part_div}|\-)? {postal_code}"""
     return rf"""
             (?:{_indexed_region1("a")}?(?:{part_div}{make_country("b")})?{_postal_code}{_indexed_region1("b")}?
             |{_indexed_region1("c")}(?![-,.\sA-Za-z]{{0,10}}{postal_code_re}))

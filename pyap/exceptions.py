@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 
 """
-    pyap.exceptions
-    ~~~~~~~~~~~~~~~~
+pyap.exceptions
+~~~~~~~~~~~~~~~~
 
-    This module contains address parser exceptions.
+This module contains address parser exceptions.
 
-    :copyright: (c) 2015 by Vladimir Goncharov.
-    :license: MIT, see LICENSE for more details.
+:copyright: (c) 2015 by Vladimir Goncharov.
+:license: MIT, see LICENSE for more details.
 """
 
 

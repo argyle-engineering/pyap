@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
 
 """
-    pyap.parser
-    ~~~~~~~~~~~~~~~~
+pyap.parser
+~~~~~~~~~~~~~~~~
 
-    This module contains AddressParser class which connects all the
-    functionality of the package in one place.
+This module contains AddressParser class which connects all the
+functionality of the package in one place.
 
-    :copyright: (c) 2015 by Vladimir Goncharov.
-    :license: MIT, see LICENSE for more details.
+:copyright: (c) 2015 by Vladimir Goncharov.
+:license: MIT, see LICENSE for more details.
 """
 
 import re
@@ -32,13 +32,13 @@ class AddressParser:
             self.rules = data.full_address
             self.single_street_rules = data.full_street
 
-        except ImportError:
+        except ImportError as exc:
             raise e.CountryDetectionMissing(
                 'Detection rules for country "{country}" not found.'.format(
                     country=self.country
                 ),
                 "Error 2",
-            )
+            ) from exc
 
     def parse(self, text: str) -> List[address.Address]:
         """Returns a list of addresses found in text
@@ -100,7 +100,7 @@ class AddressParser:
                 if k not in keys:
                     keys.append(k)
                     vals.append(v)
-        return dict(zip(keys, vals))
+        return dict(zip(keys, vals, strict=True))
 
     @staticmethod
     def _normalize_string(text: str) -> str:

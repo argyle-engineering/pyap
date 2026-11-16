@@ -1,19 +1,18 @@
 # -*- coding: utf-8 -*-
 
 """
-    pyap.source_GB.data
-    ~~~~~~~~~~~~~~~~~~~~
+pyap.source_GB.data
+~~~~~~~~~~~~~~~~~~~~
 
-    This module provides regular expression definitions required for
-    detecting British/GB/UK addresses.
+This module provides regular expression definitions required for
+detecting British/GB/UK addresses.
 
-    The module is expected to always contain 'full_address' variable containing
-    all address parsing definitions.
+The module is expected to always contain 'full_address' variable containing
+all address parsing definitions.
 
-    :copyright: (c) 2015 by Vladimir Goncharov.
-    :license: MIT, see LICENSE for more details.
+:copyright: (c) 2015 by Vladimir Goncharov.
+:license: MIT, see LICENSE for more details.
 """
-
 
 """Numerals from one to nine
 Note: here and below we use syntax like '[Oo][Nn][Ee]'

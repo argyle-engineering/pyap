@@ -1,17 +1,17 @@
 # -*- coding: utf-8 -*-
 
 """
-    pyap.source_US.data
-    ~~~~~~~~~~~~~~~~~~~~
+pyap.source_US.data
+~~~~~~~~~~~~~~~~~~~~
 
-    This module provides regular expression definitions required for
-    detecting Canada addresses.
+This module provides regular expression definitions required for
+detecting Canada addresses.
 
-    The module is expected to always contain 'full_address' variable containing
-    all address parsing definitions.
+The module is expected to always contain 'full_address' variable containing
+all address parsing definitions.
 
-    :copyright: (c) 2015 by Vladimir Goncharov.
-    :license: MIT, see LICENSE for more details.
+:copyright: (c) 2015 by Vladimir Goncharov.
+:license: MIT, see LICENSE for more details.
 """
 
 import re
@@ -149,9 +149,7 @@ post_direction = r"""
                             O[\.\ ]
                         )
                     )
-                """.format(
-    d="[\ ,]"
-)
+                """.format(d=r"[\ ,]")
 
 # Regexp for matching street type
 # According to
@@ -308,9 +306,7 @@ street_type = r"""
                 [\(\ \,]{route_symbols}
                 [Rr][Oo][Uu][Tt][Ee]\ [A-Za-z0-9]+[\)\ \,]{route_symbols}
             )?
-            """.format(
-    div="[\.\ ,]{0,2}", route_symbols="{0,3}"
-)
+            """.format(div=r"[\.\ ,]{0,2}", route_symbols="{0,3}")
 
 floor = r"""
             (?P<floor>
@@ -399,11 +395,11 @@ po_box = r"""
 """Define detection rules for a second type of address format
    (the French one)
 """
-street_number_b = re.sub("<([a-z\_]+)>", r"<\1_b>", street_number)
-street_name_b = re.sub("<([a-z\_]+)>", r"<\1_b>", street_name)
-street_type_b = re.sub("<([a-z\_]+)>", r"<\1_b>", street_type)
-po_box_b = re.sub("<([a-z\_]+)>", r"<\1_b>", po_box)
-post_direction_b = re.sub("<([a-z\_]+)>", r"<\1_b>", post_direction)
+street_number_b = re.sub(r"<([a-z\_]+)>", r"<\1_b>", street_number)
+street_name_b = re.sub(r"<([a-z\_]+)>", r"<\1_b>", street_name)
+street_type_b = re.sub(r"<([a-z\_]+)>", r"<\1_b>", street_type)
+po_box_b = re.sub(r"<([a-z\_]+)>", r"<\1_b>", po_box)
+post_direction_b = re.sub(r"<([a-z\_]+)>", r"<\1_b>", post_direction)
 
 po_box_positive_lookahead = r"""
             (?=
@@ -479,7 +475,7 @@ full_street = r"""
     po_box=po_box,
     po_box_b=po_box_b,
     po_box_positive_lookahead=po_box_positive_lookahead,
-    div="[\ ,]{1,2}",
+    div=r"[\ ,]{1,2}",
 )
 
 # region1 here is actually a "province"
@@ -551,8 +547,8 @@ country = r"""
             """
 
 # define detection rules for postal code placed in different parts of address
-postal_code_b = re.sub("<([a-z\_]+)>", r"<\1_b>", postal_code)
-postal_code_c = re.sub("<([a-z\_]+)>", r"<\1_c>", postal_code)
+postal_code_b = re.sub(r"<([a-z\_]+)>", r"<\1_b>", postal_code)
+postal_code_c = re.sub(r"<([a-z\_]+)>", r"<\1_c>", postal_code)
 
 full_address = r"""
                 (?P<full_address>
@@ -569,7 +565,7 @@ full_address = r"""
                 )
                 """.format(
     full_street=full_street,
-    div="[\, ]{,2}",
+    div=r"[\, ]{,2}",
     city=city,
     region1=region1,
     country=country,
