@@ -533,6 +533,7 @@ def test_po_box_positive(input, expected):
         ("99 Valley Greens Dr\nSouth Tower", True),
         ("612 NC 54 Apt B77", True),
         ("US ROUTE #25", True),
+        ("111 TERRA HGTS", True),
         # negative assertions
         ("6 95 34 75 COMPANY PHONE IS", False),
         (", 666 Hell ST PMB 29700", False),
