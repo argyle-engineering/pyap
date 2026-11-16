@@ -49,11 +49,15 @@ Run the same checks used by CI:
 
 .. code-block:: bash
 
-    $ uv run ruff check .
-    $ uv run ruff format --check .
-    $ uv run yamllint .
-    $ uv run pyright
-    $ uv run pytest tests
+    $ uv run task check
+
+Individual tasks include ``lint``, ``check_fmt``, ``check_types``, ``fmt``, and
+``test``. For example:
+
+.. code-block:: bash
+
+    $ uv run task fmt
+    $ uv run task test
 
 
 

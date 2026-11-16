@@ -37,6 +37,7 @@ dev = [
     "pyright>=1.1.414",
     "pytest>=9.2.0",
     "ruff>=0.17.5",
+    "taskipy>=1.14.1",
     "yamllint>=1.38.0",
 ]
 
@@ -63,6 +64,14 @@ include = [
     "/tests",
     "/uv.lock",
 ]
+
+[tool.taskipy.tasks]
+lint = "ruff check . && yamllint ."
+check_types = "pyright"
+check_fmt = "ruff format --check ."
+fmt = "ruff format . && ruff check . --fix"
+test = "pytest tests -vvv"
+check = "task lint && task check_fmt && task check_types && task test"
 
 [tool.pyright]
 pythonVersion = "3.11"
