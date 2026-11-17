@@ -1124,10 +1124,19 @@ building = r"""
 # A unit id is short and always contains a digit.
 # A plain word like the "Shore" in "Bay Shore" is a city, not
 # a unit id - we don't let one start with three letters.
-occupancy_details = (
-    r"(?:(?:\#\ )?(?![A-Za-z]{{3}})[A-Za-z\#\&\-\d]{{1,7}}"
-    r"(?:\s?{post_direction_re})?)".format(post_direction_re=post_direction_re)
-)
+# A unit id can also come in two parts, a letter and a number: "STE C 199".
+occupancy_details = r"""
+            (?:
+                # two-part unit id: a letter and a number, e.g. "C 199"
+                [A-Za-z]\ \d{{1,5}}\b
+                |
+                # single unit id, e.g. "4B", "#12", "A-3"
+                (?:\#\ )?
+                (?![A-Za-z]{{3}})
+                [A-Za-z\#\&\-\d]{{1,7}}
+                (?:\s?{post_direction_re})?
+            )
+            """.format(post_direction_re=post_direction_re)
 occupancy = r"""
             (?P<occupancy>
                 (?:
