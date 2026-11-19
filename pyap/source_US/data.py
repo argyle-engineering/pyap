@@ -1181,6 +1181,12 @@ occupancy = r"""
                         \d{{2,4}}\ [Ss][Tt][Ee](?:\ \*)?
                     )
                     |
+                    # Bare hyphenated unit id, e.g. "220-581" in
+                    # "2222 Francisco Dr 220-581". A third group makes it a
+                    # phone number, not a unit. It goes before the plain
+                    # number below, which would stop at "220".
+                    (?:\b\d{{1,4}}-\d{{1,4}}\b(?!-))
+                    |
                     (?:
                         \#\ ?[0-9]{{,4}}[A-Za-z]{{1}}
                     )
@@ -1188,8 +1194,6 @@ occupancy = r"""
                     (?:
                         \#?\ ?[0-9]{{1,4}}[A-Za-z]{{,1}}
                     )
-                    |
-                    (?:\b\d{{2}}-\d{{4}})
                     |
                     (?:
                         # Other Suite case
