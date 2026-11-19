@@ -376,7 +376,9 @@ def test_building(input, expected):
         ("Lot#18", True),
         ("B2", True),
         ("apt # 2d", True),
+        ("220-581", True),
         # negative assertions
+        ("851-234-2567", False),
         ("suite900 ", False),
         ("suite218 ", False),
     ],
@@ -660,6 +662,7 @@ def test_full_street_positive(input, expected):
         ("2006 Broadway Ave Suite 2A, PO Drawer J, Great Bend, KS 67530", True),
         ("135 Pinelawn Road STE 130 S, Melville, NY 11747", True),
         ("123 Main RD\nSTE B 245\nSPRINGFIELD, IL 62701", True),
+        ("2222 Francisco Dr 220-581\nEl Dorado Hills CA 95762", True),
         ("1800 M STREET NW SUITE 375 N, WASHINGTON, DC 20036", True),
         ("10 INDIAN BAY, ALAMEDA CA 94502", True),
         ("1234 THE BENT TWIG JOHNS ISLAND, KY 40207", True),
