@@ -427,6 +427,20 @@ def test_combine_results():
             },
         ),
         (
+            "9099 Mail Service Ctr # ACP4821\nRaleigh, NC 27699-9000",
+            {
+                "street_number": "9099",
+                "street_name": "Mail Service",
+                "street_type": "Ctr",
+                "occupancy": "# ACP4821",
+                "city": "Raleigh",
+                "region1": "NC",
+                "postal_code": "27699-9000",
+                "line1": "9099 Mail Service Ctr",
+                "line2": "# ACP4821",
+            },
+        ),
+        (
             "532 N 9TH STREET\nST. LOUIS, MO 63101",
             {
                 "street_number": "532",
