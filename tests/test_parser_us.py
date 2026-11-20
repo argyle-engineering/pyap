@@ -349,6 +349,7 @@ def test_building(input, expected):
         ("Apt 1B", True),
         ("Rm. 52", True),
         ("#2b", True),
+        ("# A", True),
         ("Unit 101", True),
         ("unit 101", True),
         ("#20", True),
@@ -361,6 +362,7 @@ def test_building(input, expected):
         ("#2500C", True),
         ("# 1900", True),
         ("# 2500C", True),
+        ("# ACP4821", True),
         ("Bay 52", True),
         ("BAY 52", True),
         ("Site 123", True),
@@ -378,6 +380,8 @@ def test_building(input, expected):
         ("apt # 2d", True),
         ("220-581", True),
         # negative assertions
+        ("# ABC4821", False),
+        ("# ACP", False),
         ("851-234-2567", False),
         ("suite900 ", False),
         ("suite218 ", False),
@@ -681,6 +685,7 @@ def test_full_street_positive(input, expected):
         ("567-55 Arlington Terrace Fl1 \nJamaica, NY 11435", True),
         ("612 NC 54 Apt B77 \nCarrboro, NC 27510-6105", True),
         ("US ROUTE #25\nMEGAVILLE NJ 08876", True),
+        ("9099 Mail Service Ctr # ACP4821\nRaleigh, NC 27699-9000", True),
         # negative assertions
         ("123 Nw Awesome Drive\n12345", False),
         ("ONE HEALING CENTER LLC, 16444", False),
