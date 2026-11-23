@@ -179,8 +179,12 @@ def test_street_name(input, expected):
         ("Alt 123", True),
         ("Alternate 123", True),
         ("NC 54", True),
+        ("FM 2401", True),
+        ("RM 620", True),
+        ("FM-1960", True),
         # negative assertions
         ("nC 54", False),
+        ("FM 12345", False),
     ],
 )
 def test_numbered_or_typeless_street_name(input, expected):
@@ -667,6 +671,9 @@ def test_full_street_positive(input, expected):
         ("135 Pinelawn Road STE 130 S, Melville, NY 11747", True),
         ("123 Main RD\nSTE B 245\nSPRINGFIELD, IL 62701", True),
         ("2222 Francisco Dr 220-581\nEl Dorado Hills CA 95762", True),
+        ("4120 FM 1092\nStafford TX 77477", True),
+        ("918 Harbor Ave N B\nAberdeen WA 98520", True),
+        ("918 Harbor Ave N B, Aberdeen, WA 98520", True),
         ("1800 M STREET NW SUITE 375 N, WASHINGTON, DC 20036", True),
         ("10 INDIAN BAY, ALAMEDA CA 94502", True),
         ("1234 THE BENT TWIG JOHNS ISLAND, KY 40207", True),

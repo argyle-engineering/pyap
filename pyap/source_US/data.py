@@ -272,6 +272,9 @@ single_street_name_list = [
 
 numbered_road_re = r"""[Ss][Tt][Aa][Tt][Ee]\ [Rr][Oo][Aa][Dd]\ \d{1,4}(?!\d)"""
 
+# Texas Farm to Market and Ranch to Market roads: `FM 2401`, `RM 620`, `FM-1960`.
+numbered_farm_road_re = r"""(?:FM|RM)[\ \-]\d{1,4}(?!\d)"""
+
 numbered_route_re = r"""(?:[Uu][Ss]\ )?[Rr][Oo][Uu][Tt][Ee]\ \#?\d{1,4}(?!\d)"""
 
 numbered_alternate = (
@@ -304,6 +307,8 @@ def numbered_or_typeless_street_name(idx: str) -> str:
                 |
                 {numbered_road_re}
                 |
+                {numbered_farm_road_re}
+                |
                 {numbered_route_re}
                 |
                 {numbered_alternate}
@@ -320,6 +325,7 @@ def numbered_or_typeless_street_name(idx: str) -> str:
         highway_re=highway_re,
         numbered_avenue_re=numbered_avenue_re,
         numbered_road_re=numbered_road_re,
+        numbered_farm_road_re=numbered_farm_road_re,
         numbered_route_re=numbered_route_re,
         numbered_alternate=numbered_alternate,
         numbered_state_highway=numbered_state_highway,
@@ -1195,6 +1201,11 @@ occupancy = r"""
                     (?:
                         \#\ ?[0-9]{{,4}}[A-Za-z]{{1}}
                     )
+                    |
+                    # Bare letter unit id ending the street line, e.g. the
+                    # "B" in "918 Harbor Ave N B". Anywhere else a lone
+                    # letter could be the start of the city.
+                    (?:\b[A-Z](?=\ *(?:\n|,|$)))
                     |
                     (?:
                         \#?\ ?[0-9]{{1,4}}[A-Za-z]{{,1}}
